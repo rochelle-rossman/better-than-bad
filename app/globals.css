@@ -1,26 +1,83 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --color-dark-purple: oklch(21.985% 0.07968 349.385);
+  --color-deep-mauve: oklch(32.975% 0.12703 351.961);
+  --color-light-pink: oklch(90.689% 0.02543 341.646);
+  --color-light-mustard: oklch(92.633% 0.0844 103.544);
+  --color-mint: oklch(85.766% 0.0759 158.663);
+  --color-forest: oklch(39.381% 0.05064 178.138);
+  --color-teal-blue: oklch(42.699% 0.06752 233.265);
+  --color-navy: oklch(28.198% 0.04721 233.854);
 }
 
 @theme inline {
+  /* colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--color-teal-blue);
+  --color-secondary: var(--color-mint);
+  --color-accent: var(--color-light-mustard);
+  --color-bg: var(--color-light-pink);
+  --color-text: var(--color-navy);
+
+  /* fonts */
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  
+  /* border radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .bg-gradient {
+    background-image: radial-gradient(circle at 40% 120%,
+        #61093C,
+        #23556E,
+        #244F46);
+    /* background-size: 200% 200%;
+    background-repeat: no-repeat;
+    background-attachment: fixed; */
+    animation: gradient-pulse 20s ease-in-out infinite;
+  }
+
+
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes gradient-pulse {
+
+      0%,
+      100% {
+        background-position: 20% 25%;
+      }
+
+      50% {
+        background-position: 25% 30%;
+
+      }
+    }
+  }
+
+  .bg-gradient-animate {
+    animation: gradient-pulse 20s ease-in-out infinite;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  h1 {
+    @apply text-5xl md:text-6xl text-center mb-4;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
 }
