@@ -3,10 +3,7 @@ export default function Contact() {
 		<div className='flex flex-col justify-center items-center min-h-screen p-8'>
 			<h1 className='text-4xl mb-4'>Contact</h1>
 			<p className='text-lg max-w-2xl text-center'>
-				Welcome to Better Than Bad! We are passionate about creating
-				high-quality content that inspires and entertains. Our team is
-				dedicated to pushing the boundaries of creativity and delivering
-				exceptional experiences to our audience.
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat tempore minima qui aut odio, ipsum ad rem eos eum quaerat quos minus quidem modi sit consectetur nemo magnam? Cum, porro! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia quos facere ab reiciendis, optio molestiae temporibus, dolorum ad magnam corrupti perspiciatis, atque inventore veritatis architecto! Natus nemo libero eum optio.lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat tempore minima qui aut odio, ipsum ad rem eos eum quaerat quos minus quidem modi sit consectetur nemo magnam? Cum, porro! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia quos facere ab reiciendis, optio molestiae temporibus, dolorum ad magnam corrupti perspiciatis, atque inventore veritatis architecto! Natus nemo libero eum optio.
 			</p>
 		</div>
 	)

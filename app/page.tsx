@@ -12,12 +12,12 @@ export default function Home() {
 			gsap.to(panel, {
 				scrollTrigger: {
 					trigger: panel,
-					start: 'top top',
+					start: () => panel.offsetHeight < window.innerHeight ? 'top top' : 'bottom bottom',
 					pin: true,
+					pinSpacing: false,
 					scrub: true,
+					snap: 1 / (panels.length - 1),
 				},
-				yPercent: 20,
-				ease: 'none',
 			})
 		})
 		ScrollSmoother.create({
@@ -32,6 +32,17 @@ export default function Home() {
 			id='smooth-wrapper'
 		>
 			<main id='smooth-content'>
+				<section className='panel relative w-full h-screen'>
+					<div className='w-full h-full flex flex-col justify-center items-center '>
+						<Image
+							src={'/btbfilms.svg'}
+							alt='Logo'
+							width={800}
+							height={400}
+							className='aspect-auto'
+						/>
+					</div>
+				</section>
 				<section className='panel relative h-full overflow-hidden'>
 					<video
 						autoPlay
@@ -44,15 +55,7 @@ export default function Home() {
 							type='video/mp4'
 						/>
 					</video>
-					<div className='absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center'>
-						<Image
-							src={'/btbfilms.svg'}
-							alt='Logo'
-							width={350}
-							height={250}
-							className='aspect-auto'
-						/>
-					</div>
+					
 				</section>
 				<section className='panel relative h-full flex justify-center items-center'>
 					<video
