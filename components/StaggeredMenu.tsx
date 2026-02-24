@@ -1,19 +1,16 @@
 'use client'
 
 import { gsap } from 'gsap'
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import { FaInstagram } from 'react-icons/fa'
 
 const navItems = [
 	{ label: 'Home', href: '/' },
 	{ label: 'About', href: '/#about' },
 	{ label: 'Contact', href: '/#contact' },
-	
 ]
 
-const socialItems = [
-	{ label: 'Instagram', href: '#', icon: <FaInstagram /> },
-]
+const socialItems = [{ label: 'Instagram', href: '#', icon: <FaInstagram /> }]
 
 const layerColors = [
 	'#330520',
@@ -27,8 +24,6 @@ const layerColors = [
 ]
 
 export default function StaggeredMenu() {
-	const [open, setOpen] = useState(false)
-
 	const panelRef = useRef<HTMLDivElement>(null)
 	const layersRef = useRef<HTMLDivElement[]>([])
 	const navRefs = useRef<HTMLAnchorElement[]>([])
@@ -40,9 +35,6 @@ export default function StaggeredMenu() {
 
 	useLayoutEffect(() => {
 		const ctx = gsap.context(() => {
-			gsap.set(panelRef.current, { xPercent: 100 })
-			gsap.set(layersRef.current, { xPercent: 100 })
-
 			gsap.set(navRefs.current, {
 				y: 40,
 				rotate: 6,
@@ -53,152 +45,99 @@ export default function StaggeredMenu() {
 				y: 20,
 				opacity: 0,
 			})
-		})
+
+			const tl = gsap.timeline({ paused: true })
+
+			tl.to(layersRef.current, {
+				right: 0,
+				duration: 0.5,
+				stagger: 0.08,
+				ease: 'power4.out',
+			})
+
+			tl.to(
+				panelRef.current,
+				{
+					right: 0,
+					duration: 0.5,
+					ease: 'power4.out',
+				},
+				'-=0.3',
+			)
+
+			tl.to(
+				navRefs.current,
+				{
+					y: 0,
+					rotate: 0,
+					opacity: 1,
+					stagger: 0.08,
+					duration: 0.7,
+					ease: 'power4.out',
+				},
+				'-=0.4',
+			)
+
+			tl.to(
+				socialRefs.current,
+				{
+					y: 0,
+					opacity: 1,
+					stagger: 0.06,
+					duration: 0.4,
+					ease: 'power3.out',
+				},
+				'-=0.4',
+			)
+
+			tl.to(iconRef.current, { rotate: 45, duration: 0.3 }, 0)
+
+			tlRef.current = tl
+
+			// Start closed
+			tl.reverse()
+		}, panelRef)
 
 		return () => ctx.revert()
 	}, [])
 
-	function openMenu() {
-		tlRef.current?.kill()
+	const toggleMenu = () => {
+		const tl = tlRef.current
+		if (!tl) return
 
-		const tl = gsap.timeline()
-
-		// Color layers stagger
-		tl.to(layersRef.current, {
-			xPercent: 0,
-			duration: 0.8,
-			stagger: 0.08,
-			ease: 'power4.out',
-		})
-
-		// Main panel
-		tl.to(
-			panelRef.current,
-			{
-				xPercent: 0,
-				duration: 0.8,
-				ease: 'power4.out',
-			},
-			'-=0.3',
-		)
-
-		// Nav items stagger
-		tl.to(
-			navRefs.current,
-			{
-				y: 0,
-				rotate: 0,
-				opacity: 1,
-				stagger: 0.08,
-				duration: 0.7,
-				ease: 'power4.out',
-			},
-			'-=0.4',
-		)
-
-		// Social items stagger
-		tl.to(
-			socialRefs.current,
-			{
-				y: 0,
-				opacity: 1,
-				stagger: 0.06,
-				duration: 0.4,
-				ease: 'power3.out',
-			},
-			'-=0.4',
-		)
-
-		// Icon rotate
-		tl.to(
-			iconRef.current,
-			{
-				rotate: 45,
-				duration: 0.3,
-			},
-			0,
-		)
-
-		tlRef.current = tl
+		if (tl.reversed()) {
+			tl.play()
+		} else {
+			tl.reverse()
+		}
 	}
 
-	const closeMenu = useCallback(() => {
-		tlRef.current?.kill()
-
-		const tl = gsap.timeline()
-
-		tl.to([...navRefs.current, ...socialRefs.current], {
-			y: 20,
-			opacity: 0,
-			stagger: 0.04,
-			duration: 0.2,
-		})
-
-		tl.to(
-			panelRef.current,
-			{
-				xPercent: 100,
-				duration: 0.4,
-				ease: 'power4.in',
-			},
-			'-=0.2',
-		)
-
-		tl.to(
-			layersRef.current,
-			{
-				xPercent: 100,
-				duration: 0.4,
-				stagger: 0.04,
-				ease: 'power4.in',
-			},
-			'-=0.4',
-		)
-
-		tl.to(
-			iconRef.current,
-			{
-				rotate: 0,
-				duration: 0.3,
-			},
-			0,
-		)
-
-		tlRef.current = tl
-	}, [])
-
-	const toggleMenu = useCallback(() => {
-		const next = !open
-		setOpen(next)
-
-		if (next) openMenu()
-		else closeMenu()
-	}, [open, closeMenu])
-
+	// Outside click without state
 	useEffect(() => {
 		function handleClick(e: MouseEvent) {
+			const tl = tlRef.current
+			if (!tl || tl.reversed()) return
+
 			if (
-				open &&
 				panelRef.current &&
 				!panelRef.current.contains(e.target as Node) &&
 				buttonRef.current &&
 				!buttonRef.current.contains(e.target as Node)
 			) {
-				closeMenu()
+				tl.reverse()
 			}
 		}
 
 		document.addEventListener('mousedown', handleClick)
 		return () => document.removeEventListener('mousedown', handleClick)
-	}, [open, closeMenu])
+	}, [])
 
 	return (
 		<>
-			{/* Toggle */}
 			<button
 				ref={buttonRef}
 				onClick={toggleMenu}
-				className='fixed top-6 right-6 z-50 cursor-pointer w-10 h-10 flex items-center justify-center'
+				className='fixed top-6 right-6 z-50 w-10 h-10 flex items-center justify-center'
 				aria-label='Toggle menu'
 				type='button'
 			>
@@ -211,22 +150,20 @@ export default function StaggeredMenu() {
 				</div>
 			</button>
 
-			{/* Color Layers */}
 			{layerColors.map((color, i) => (
 				<div
 					key={i}
 					ref={(el) => {
 						if (el) layersRef.current[i] = el
 					}}
-					className='fixed top-0 right-0 w-full md:w-2/3 h-screen z-30'
+					className='fixed top-0 -right-full w-full md:w-2/3 h-screen z-30'
 					style={{ backgroundColor: color }}
 				/>
 			))}
 
-			{/* Main Panel */}
 			<div
 				ref={panelRef}
-				className='fixed top-0 right-0 w-full md:w-2/3 h-screen bg-light-mustard z-40 flex flex-col gap-14 p-16'
+				className='fixed top-0 -right-full w-full md:w-2/3 h-screen bg-light-mustard z-40 flex flex-col gap-14 p-16'
 			>
 				<nav className='flex flex-col gap-8'>
 					{navItems.map((item, i) => (
