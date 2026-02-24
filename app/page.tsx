@@ -1,24 +1,57 @@
 'use client'
-import Image from 'next/image'
+import ContactForm from '@/components/ContactForm'
+import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollSmoother, ScrollTrigger } from 'gsap/all'
-import { useGSAP } from '@gsap/react'
+import Image from 'next/image'
 
 export default function Home() {
 	useGSAP(() => {
 		gsap.registerPlugin(ScrollSmoother, ScrollTrigger)
 		const panels = gsap.utils.toArray<HTMLElement>('.panel')
+		const tops = panels.map((panel) =>
+			ScrollTrigger.create({ trigger: panel, start: 'top top' }),
+		)
 		panels.forEach((panel) => {
 			gsap.to(panel, {
 				scrollTrigger: {
 					trigger: panel,
-					start: () => panel.offsetHeight < window.innerHeight ? 'top top' : 'bottom bottom',
+					start: () =>
+						panel.offsetHeight < window.innerHeight ?
+							'top top'
+						:	'bottom bottom',
 					pin: true,
 					pinSpacing: false,
 					scrub: true,
 					snap: 1 / (panels.length - 1),
 				},
 			})
+		})
+		ScrollTrigger.create({
+			snap: {
+				snapTo: (_progress, self) => {
+					const panelStarts = tops.map((st) => st.start),
+						snapScroll = gsap.utils.snap(
+							panelStarts,
+							self?.scroll() || 0,
+						) // find the closest one
+					return gsap.utils.normalize(
+						0,
+						ScrollTrigger.maxScroll(window),
+						snapScroll,
+					)
+				},
+				duration: 0.5,
+			},
+		})
+		// scroll based scale animation for the logo in the first panel
+		gsap.to('.panel:nth-child(1) .logo', {
+			scale: 1.5,
+			scrollTrigger: {
+				trigger: '.panel:nth-child(1)',
+				start: 'top top',
+				scrub: true,
+			},
 		})
 		ScrollSmoother.create({
 			smooth: 2,
@@ -33,13 +66,16 @@ export default function Home() {
 		>
 			<main id='smooth-content'>
 				<section className='panel relative w-full h-screen'>
-					<div className='w-full h-full flex flex-col justify-center items-center '>
+					<div className='w-full h-full flex flex-col justify-center items-center mt-12'>
+						<p className='tagline text-xl text-white pt-16'>
+							Cinematic craft with strategic precision.{' '}
+						</p>
 						<Image
 							src={'/btbfilms.svg'}
 							alt='Logo'
 							width={800}
 							height={400}
-							className='aspect-auto'
+							className='logo aspect-auto'
 						/>
 					</div>
 				</section>
@@ -55,29 +91,16 @@ export default function Home() {
 							type='video/mp4'
 						/>
 					</video>
-					
 				</section>
-				<section className='panel relative h-full flex justify-center items-center'>
-					<video
-						autoPlay
-						loop
-						muted
-						preload='none'
-						className='w-full h-auto'
+				<section className='panel relative h-screen flex justify-center items-center'>
+					<div id='about'></div>
+				</section>
+				<section className='panel w-full h-screen flex justify-center items-center'>
+					<div
+						id='contact'
+						className='w-full h-full flex flex-col justify-center items-center mt-16'
 					>
-						<source
-							src='/static-tv-glitch.mp4'
-							type='video/mp4'
-						/>
-					</video>
-
-					<div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-medium text-center p-4 flex flex-col gap-4 bg-black/50 rounded-lg'>
-						<p className='text-2xl'>This is a test.</p>
-						<p className='text-3xl'>
-							Website under construction. Stay tuned for more
-							soon!
-						</p>
-						<p className='text-4xl'>This is only a test.</p>
+						<ContactForm />
 					</div>
 				</section>
 			</main>

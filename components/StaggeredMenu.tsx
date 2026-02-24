@@ -2,20 +2,29 @@
 
 import { gsap } from 'gsap'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { FaFacebookF, FaInstagram } from 'react-icons/fa'
+import { FaInstagram } from 'react-icons/fa'
 
 const navItems = [
 	{ label: 'Home', href: '/' },
-	{ label: 'About', href: '/about' },
-	{ label: 'Contact', href: '/contact' },
+	{ label: 'About', href: '/#about' },
+	{ label: 'Contact', href: '/#contact' },
+	
 ]
 
 const socialItems = [
-	{ label: 'Facebook', href: '#', icon: <FaFacebookF /> },
 	{ label: 'Instagram', href: '#', icon: <FaInstagram /> },
 ]
 
-const layerColors = ['#61093C', '#EDDAE5', '#F0EAA8', '#A6E0BE']
+const layerColors = [
+	'#330520',
+	'#61093C',
+	'#EDDAE5',
+	'#F0EAA8',
+	'#A6E0BE',
+	'#244F46',
+	'#23556E',
+	'#0D2D3D',
+]
 
 export default function StaggeredMenu() {
 	const [open, setOpen] = useState(false)
@@ -189,7 +198,7 @@ export default function StaggeredMenu() {
 			<button
 				ref={buttonRef}
 				onClick={toggleMenu}
-				className='fixed top-6 right-6 z-50'
+				className='fixed top-6 right-6 z-50 cursor-pointer w-10 h-10 flex items-center justify-center'
 				aria-label='Toggle menu'
 				type='button'
 			>
@@ -209,7 +218,7 @@ export default function StaggeredMenu() {
 					ref={(el) => {
 						if (el) layersRef.current[i] = el
 					}}
-					className='fixed top-0 right-0 w-full h-screen z-30'
+					className='fixed top-0 right-0 w-full md:w-2/3 h-screen z-30'
 					style={{ backgroundColor: color }}
 				/>
 			))}
@@ -217,7 +226,7 @@ export default function StaggeredMenu() {
 			{/* Main Panel */}
 			<div
 				ref={panelRef}
-				className='fixed top-0 right-0 w-full h-screen bg-light-mustard z-40 flex flex-col gap-14 p-16'
+				className='fixed top-0 right-0 w-full md:w-2/3 h-screen bg-light-mustard z-40 flex flex-col gap-14 p-16'
 			>
 				<nav className='flex flex-col gap-8'>
 					{navItems.map((item, i) => (
@@ -227,7 +236,7 @@ export default function StaggeredMenu() {
 							ref={(el) => {
 								if (el) navRefs.current[i] = el
 							}}
-							className='text-6xl tracking-wider uppercase text-deep-mauve hover:text-primary transition-colors flex'
+							className='text-6xl tracking-wider uppercase text-deep-mauve hover:text-primary transition-colors flex w-min'
 						>
 							{item.label}
 							<span className='ml-2 text-sm'>{i + 1}</span>
@@ -244,7 +253,7 @@ export default function StaggeredMenu() {
 								if (el) socialRefs.current[i] = el
 							}}
 						>
-							<span className='text-2xl'>{item.icon}</span>
+							<span className='text-3xl'>{item.icon}</span>
 						</a>
 					))}
 				</div>
