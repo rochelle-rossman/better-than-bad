@@ -21,8 +21,15 @@
   --color-primary: var(--color-teal-blue);
   --color-secondary: var(--color-mint);
   --color-accent: var(--color-light-mustard);
-  --color-bg: var(--color-light-pink);
   --color-text: var(--color-navy);
+  --color-dark-purple: var(--color-dark-purple);
+  --color-deep-mauve: var(--color-deep-mauve);
+  --color-light-pink: var(--color-light-pink);
+  --color-light-mustard: var(--color-light-mustard);
+  --color-mint: var(--color-mint);
+  --color-forest: var(--color-forest);
+  --color-teal-blue: var(--color-teal-blue);
+  --color-navy: var(--color-navy);
 
   /* fonts */
   --font-heading: var(--font-heading);
