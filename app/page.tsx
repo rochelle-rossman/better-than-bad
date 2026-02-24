@@ -8,10 +8,17 @@ import Image from 'next/image'
 export default function Home() {
 	useGSAP(() => {
 		gsap.registerPlugin(ScrollSmoother, ScrollTrigger)
+
+		ScrollSmoother.create({
+			smooth: 2,
+			effects: true,
+		})
+
 		const panels = gsap.utils.toArray<HTMLElement>('.panel')
 		const tops = panels.map((panel) =>
 			ScrollTrigger.create({ trigger: panel, start: 'top top' }),
 		)
+
 		panels.forEach((panel) => {
 			gsap.to(panel, {
 				scrollTrigger: {
@@ -27,6 +34,7 @@ export default function Home() {
 				},
 			})
 		})
+
 		ScrollTrigger.create({
 			snap: {
 				snapTo: (_progress, self) => {
@@ -44,18 +52,41 @@ export default function Home() {
 				duration: 0.5,
 			},
 		})
+
 		// scroll based scale animation for the logo in the first panel
 		gsap.to('.panel:nth-child(1) .logo', {
-			scale: 1.5,
+			scale: 2,
 			scrollTrigger: {
 				trigger: '.panel:nth-child(1)',
 				start: 'top top',
+				end: 'bottom top',
 				scrub: true,
+				invalidateOnRefresh: true,
 			},
 		})
-		ScrollSmoother.create({
-			smooth: 2,
-			effects: true,
+
+		gsap.to('.panel:nth-child(1) .tagline', {
+			scale: .5,
+			scrollTrigger: {
+				trigger: '.panel:nth-child(1)',
+				start: 'top top',
+				end: 'bottom top',
+				scrub: true,
+				invalidateOnRefresh: true,
+			},
+		})
+
+		// fade in the second panel as it scrolls into view
+		gsap.set('.panel video', { opacity: 0 })
+		gsap.to('.panel video', {
+			opacity: 1,
+			scrollTrigger: {
+				trigger: '.panel video',
+				start: 'top 60%',
+				end: 'top 20%',
+				scrub: true,
+				invalidateOnRefresh: true,
+			},
 		})
 	})
 
@@ -75,7 +106,7 @@ export default function Home() {
 							alt='Logo'
 							width={800}
 							height={400}
-							className='logo aspect-auto'
+							className='logo aspect-auto h-auto'
 						/>
 					</div>
 				</section>
