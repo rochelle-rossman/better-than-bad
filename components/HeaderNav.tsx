@@ -4,7 +4,7 @@ import StaggeredMenu from './StaggeredMenu'
 
 export default function HeaderNav() {
 	return (
-		<nav className='flex justify-center fixed top-0 left-0 right-0 z-50 w-full shadow-2xl'>
+		<nav className='flex justify-center absolute top-0 left-0 right-0 z-50 w-full shadow-2xl'>
 			<div className='p-4 flex items-center justify-between w-full'>
 				<div>
 					<Link
@@ -17,7 +17,7 @@ export default function HeaderNav() {
 							width={50}
 							height={50}
 						/>
-						<span className='uppercase font-medium text-lg text-foreground'>
+						<span className='uppercase font-medium text-lg text-white'>
 							Better Than Bad Films
 						</span>
 					</Link>

@@ -1,13 +1,17 @@
 'use client'
 
 import { gsap } from 'gsap'
+import { useRouter } from 'next/navigation'
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import { FaInstagram } from 'react-icons/fa'
+import { Button } from '@/components/ui/button'
 
 const navItems = [
 	{ label: 'Home', href: '/' },
 	{ label: 'About', href: '/#about' },
 	{ label: 'Contact', href: '/#contact' },
+	{ label: 'Work', href: '/work' },
+	{ label: 'Services', href: '/services' },
 ]
 
 const socialItems = [{ label: 'Instagram', href: '#', icon: <FaInstagram /> }]
@@ -24,6 +28,7 @@ const layerColors = [
 ]
 
 export default function StaggeredMenu() {
+	const router = useRouter()
 	const panelRef = useRef<HTMLDivElement>(null)
 	const layersRef = useRef<HTMLDivElement[]>([])
 	const navRefs = useRef<HTMLAnchorElement[]>([])
@@ -112,7 +117,42 @@ export default function StaggeredMenu() {
 		}
 	}
 
-	// Outside click without state
+	const handleNavClick =
+		(href: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+			e.preventDefault()
+			const tl = tlRef.current
+			if (!tl) {
+				router.push(href)
+				return
+			}
+
+			if (!tl.reversed()) {
+				tl.reverse()
+			}
+
+			const duration = tl.duration() * 1000
+
+			// Check if it's a same-page hash link
+			const isSamePageLink = href.includes('#')
+
+			setTimeout(() => {
+				if (isSamePageLink) {
+					// Extract the hash from the href
+					const hash =
+						href.includes('/#') ?
+							href.split('/#')[1]
+						:	href.split('#')[1]
+					const element = document.getElementById(hash)
+					if (element) {
+						element.scrollIntoView({ behavior: 'smooth' })
+					}
+				} else {
+					router.push(href)
+				}
+			}, duration)
+		}
+
+	// Outside click
 	useEffect(() => {
 		function handleClick(e: MouseEvent) {
 			const tl = tlRef.current
@@ -134,10 +174,11 @@ export default function StaggeredMenu() {
 
 	return (
 		<>
-			<button
+			<Button
 				ref={buttonRef}
 				onClick={toggleMenu}
-				className='fixed top-6 right-6 z-50 w-10 h-10 flex items-center justify-center'
+				className='fixed p-0 rounded-full top-6 right-6 z-50 w-10 h-10 flex items-center justify-center'
+				variant={'outline'}
 				aria-label='Toggle menu'
 				type='button'
 			>
@@ -148,7 +189,7 @@ export default function StaggeredMenu() {
 					<span className='absolute w-full h-0.5 bg-current left-0 top-1/2 -translate-y-1/2' />
 					<span className='absolute h-full w-0.5 bg-current left-1/2 -translate-x-1/2' />
 				</div>
-			</button>
+			</Button>
 
 			{layerColors.map((color, i) => (
 				<div
@@ -173,7 +214,8 @@ export default function StaggeredMenu() {
 							ref={(el) => {
 								if (el) navRefs.current[i] = el
 							}}
-							className='text-6xl tracking-wider uppercase text-deep-mauve hover:text-primary transition-colors flex w-min'
+							onClick={handleNavClick(item.href)}
+							className='text-6xl tracking-wider uppercase text-deep-mauve hover:text-primary flex w-min'
 						>
 							{item.label}
 							<span className='ml-2 text-sm'>{i + 1}</span>
@@ -189,6 +231,7 @@ export default function StaggeredMenu() {
 							ref={(el) => {
 								if (el) socialRefs.current[i] = el
 							}}
+							onClick={handleNavClick(item.href)}
 						>
 							<span className='text-3xl'>{item.icon}</span>
 						</a>

@@ -32,12 +32,16 @@ const ContactForm: React.FC = () => {
 	}
 
 	return (
-		<div className='w-full max-w-4xl h-full flex flex-col justify-center items-center p-8 mt-16'>
+		<section
+			className='w-full bg-background flex justify-center items-center'
+			id='contact'
+		>
 			<form
 				onSubmit={handleSubmit}
-				className='contact-form h-full w-full flex flex-col gap-6'
+				className='contact-form w-full max-w-4xl flex flex-col gap-6 p-8'
 			>
 				<div>
+					<h3 className='text-2xl font-semibold mb-4'>Get In Touch</h3>
 					<label htmlFor='name'>Name:</label>
 					<Input
 						type='text'
@@ -71,7 +75,7 @@ const ContactForm: React.FC = () => {
 				</div>
 				<Button type='submit'>Send Message</Button>
 			</form>
-		</div>
+		</section>
 	)
 }
 
