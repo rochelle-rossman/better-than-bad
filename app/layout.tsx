@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import HeaderNav from '@/components/HeaderNav'
 import Footer from '@/components/Footer'
 import { Montserrat, Karla } from 'next/font/google'
-// import SmoothProvider from '@/components/SmoothProvider'
+import SmoothProvider from '@/components/SmoothProvider'
 import './globals.css'
 
 const montserrat = Montserrat({
@@ -33,10 +33,10 @@ export default function RootLayout({
 				className={`${montserrat.variable} ${karla.variable} antialiased`}
 			>
 				<HeaderNav />
-				{/* <SmoothProvider> */}
+				<SmoothProvider>
 					{children}
 					<Footer />
-				{/* </SmoothProvider> */}
+				</SmoothProvider>
 			</body>
 		</html>
 	)

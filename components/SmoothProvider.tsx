@@ -2,8 +2,7 @@
 
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ScrollSmoother } from 'gsap/all'
+import { ScrollSmoother } from '@/lib/gsap'
 
 export default function SmoothProvider({
 	children,
@@ -14,7 +13,7 @@ export default function SmoothProvider({
 	const contentRef = useRef<HTMLDivElement>(null)
 
 	useGSAP(() => {
-		gsap.registerPlugin(ScrollSmoother)
+
 
 		if (!wrapperRef.current || !contentRef.current) return
 

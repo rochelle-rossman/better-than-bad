@@ -1,6 +1,6 @@
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollSmoother, ScrollTrigger } from 'gsap/all'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
-export { gsap, ScrollTrigger }
+export { gsap, ScrollTrigger, ScrollSmoother }

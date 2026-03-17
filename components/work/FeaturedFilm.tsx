@@ -37,7 +37,17 @@ export default function FeaturedFilm({ project, onPlay }: FeaturedFilmProps) {
 						{project.title}
 					</h2>
 
-					<p className='opacity-70'>{project.services.join(' / ')}</p>
+					{project.services && (
+						<p className='opacity-70'>
+							{project.services.join(' / ')}
+						</p>
+					)}
+					
+					{project.description && (
+						<p>
+							{project.description}
+						</p>
+					)}
 				</div>
 			</div>
 		</section>

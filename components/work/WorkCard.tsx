@@ -33,9 +33,13 @@ export default function WorkCard({ project, onPlay }: WorkCardProps) {
 
 				<h3 className='text-xl'>{project.title}</h3>
 
-				<p className='text-sm opacity-60'>
-					{project.services.join(' / ')}
-				</p>
+				{project.services && (
+					<p className='text-sm opacity-60'>
+						{project.services.join(' / ')}
+					</p>
+				)}
+
+				{project.description && <p>{project.description}</p>}
 			</div>
 		</button>
 	)
