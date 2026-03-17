@@ -34,7 +34,7 @@
   /* fonts */
   --font-heading: var(--font-heading);
   --font-body: var(--font-body);
-  
+
   /* border radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -48,14 +48,27 @@
 
 @layer utilities {
   .bg-gradient {
-    background-image: radial-gradient(circle at 40% 120%,
-        #61093C,
-        #23556E,
-        #244F46);
-    /* background-size: 200% 200%;
-    background-repeat: no-repeat;
-    background-attachment: fixed; */
+    background-image: radial-gradient(circle at 30% 20%, #2b0e1f 0%, #0f0f12 60%);
     animation: gradient-pulse 20s ease-in-out infinite;
+  }
+
+  .break-inside-avoid {
+    break-inside: avoid;
+  }
+
+  .bg-cinematic {
+    background-color: #050507;
+
+    background-image:
+      radial-gradient(800px circle at 20% 15%,
+        color-mix(in oklab, var(--color-deep-mauve) 35%, transparent),
+        transparent 60%),
+      radial-gradient(700px circle at 85% 25%,
+        color-mix(in oklab, var(--color-teal-blue) 30%, transparent),
+        transparent 65%),
+      radial-gradient(900px circle at 40% 85%,
+        color-mix(in oklab, var(--color-forest) 25%, transparent),
+        transparent 70%);
   }
 
 

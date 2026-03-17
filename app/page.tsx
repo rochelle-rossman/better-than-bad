@@ -1,140 +1,85 @@
 'use client'
-import ContactForm from '@/components/ContactForm'
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ScrollSmoother, ScrollTrigger } from 'gsap/all'
-import Image from 'next/image'
 
-export default function Home() {
-	useGSAP(() => {
-		gsap.registerPlugin(ScrollSmoother, ScrollTrigger)
+import { useRef, useLayoutEffect } from 'react'
+import { gsap } from '@/lib/gsap'
 
-		ScrollSmoother.create({
-			smooth: 2,
-			effects: true,
-		})
+import Hero from '@/components/home/Hero'
+import Reel from '@/components/home/Reel'
+import Statements from '@/components/home/Statements'
+import Services from '@/components/home/Services'
+import Gallery from '@/components/home/Gallery'
+import Testimonials from '@/components/home/Testimonials'
+import Logos from '@/components/home/Logos'
+import ContactSection from '@/components/home/ContactSection'
+import CinematicBackground from '@/components/home/CinematicBackground'
+import About from '@/components/About'
 
-		const panels = gsap.utils.toArray<HTMLElement>('.panel')
-		const tops = panels.map((panel) =>
-			ScrollTrigger.create({ trigger: panel, start: 'top top' }),
-		)
+export default function HomePage() {
+	const containerRef = useRef<HTMLElement>(null)
+	const bgRef = useRef<HTMLDivElement>(null)
 
-		panels.forEach((panel) => {
-			gsap.to(panel, {
+	useLayoutEffect(() => {
+		if (!containerRef.current) return
+
+		const ctx = gsap.context(() => {
+			// Cinematic Background Parallax
+			gsap.to(bgRef.current, {
+				yPercent: -15,
+				ease: 'none',
 				scrollTrigger: {
-					trigger: panel,
-					start: () =>
-						panel.offsetHeight < window.innerHeight ?
-							'top top'
-						:	'bottom bottom',
-					pin: true,
-					pinSpacing: false,
+					trigger: containerRef.current,
+					start: 'top top',
+					end: 'bottom top',
 					scrub: true,
-					snap: 1 / (panels.length - 1),
 				},
 			})
-		})
+		}, containerRef)
 
-		ScrollTrigger.create({
-			snap: {
-				snapTo: (_progress, self) => {
-					const panelStarts = tops.map((st) => st.start),
-						snapScroll = gsap.utils.snap(
-							panelStarts,
-							self?.scroll() || 0,
-						) // find the closest one
-					return gsap.utils.normalize(
-						0,
-						ScrollTrigger.maxScroll(window),
-						snapScroll,
-					)
-				},
-				duration: 0.5,
-			},
-		})
-
-		// scroll based scale animation for the logo in the first panel
-		gsap.to('.panel:nth-child(1) .logo', {
-			scale: 2,
-			scrollTrigger: {
-				trigger: '.panel:nth-child(1)',
-				start: 'top top',
-				end: 'bottom top',
-				scrub: true,
-				invalidateOnRefresh: true,
-			},
-		})
-
-		gsap.to('.panel:nth-child(1) .tagline', {
-			scale: .5,
-			scrollTrigger: {
-				trigger: '.panel:nth-child(1)',
-				start: 'top top',
-				end: 'bottom top',
-				scrub: true,
-				invalidateOnRefresh: true,
-			},
-		})
-
-		// fade in the second panel as it scrolls into view
-		gsap.set('.panel video', { opacity: 0 })
-		gsap.to('.panel video', {
-			opacity: 1,
-			scrollTrigger: {
-				trigger: '.panel video',
-				start: 'top 60%',
-				end: 'top 20%',
-				scrub: true,
-				invalidateOnRefresh: true,
-			},
-		})
-	})
+		return () => ctx.revert()
+	}, [])
 
 	return (
-		<div
-			className='relative bg-gradient w-full h-full overflow-x-hidden'
-			id='smooth-wrapper'
+		<main
+			ref={containerRef}
+			className='relative overflow-hidden min-h-screen'
 		>
-			<main id='smooth-content'>
-				<section className='panel relative w-full h-screen'>
-					<div className='w-full h-full flex flex-col justify-center items-center mt-12'>
-						<p className='tagline text-xl text-white pt-16'>
-							Cinematic craft with strategic precision.{' '}
-						</p>
-						<Image
-							src={'/btbfilms.svg'}
-							alt='Logo'
-							width={800}
-							height={400}
-							className='logo aspect-auto h-auto'
-						/>
-					</div>
-				</section>
-				<section className='panel relative h-full overflow-hidden'>
-					<video
-						autoPlay
-						loop
-						muted
-						className='w-full h-auto'
-					>
-						<source
-							src='/website-reel.mp4'
-							type='video/mp4'
-						/>
-					</video>
-				</section>
-				<section className='panel relative h-screen flex justify-center items-center'>
-					<div id='about'></div>
-				</section>
-				<section className='panel w-full h-screen flex justify-center items-center'>
-					<div
-						id='contact'
-						className='w-full h-full flex flex-col justify-center items-center mt-16'
-					>
-						<ContactForm />
-					</div>
-				</section>
-			</main>
-		</div>
+			<CinematicBackground />
+
+			<section className='relative z-10'>
+				<Hero />
+			</section>
+
+			<section className='relative z-10'>
+				<Reel />
+			</section>
+
+			<section className='relative z-10'>
+				<About />
+			</section>
+
+			<section className='relative z-10'>
+				<Statements />
+			</section>
+
+			<section className='relative z-10'>
+				<Services />
+			</section>
+
+			<section className='relative z-10'>
+				<Gallery />
+			</section>
+
+			<section className='relative z-10'>
+				<Testimonials />
+			</section>
+
+			<section className='relative z-10'>
+				<Logos />
+			</section>
+
+			<section className='relative z-10'>
+				<ContactSection />
+			</section>
+		</main>
 	)
 }

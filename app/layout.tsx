@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import HeaderNav from '@/components/HeaderNav'
+import Footer from '@/components/Footer'
 import { Montserrat, Karla } from 'next/font/google'
-
+import SmoothProvider from '@/components/SmoothProvider'
 import './globals.css'
 
 const montserrat = Montserrat({
@@ -15,8 +16,6 @@ const karla = Karla({
 	subsets: ['latin'],
 	weight: ['400', '500', '600', '700'],
 })
-
-
 
 export const metadata: Metadata = {
 	title: 'Better Than Bad',
@@ -34,7 +33,10 @@ export default function RootLayout({
 				className={`${montserrat.variable} ${karla.variable} antialiased`}
 			>
 				<HeaderNav />
-				{children}
+				<SmoothProvider>
+					{children}
+					<Footer />
+				</SmoothProvider>
 			</body>
 		</html>
 	)
