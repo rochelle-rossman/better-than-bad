@@ -37,16 +37,11 @@ export default function Statements() {
 			ref={container}
 			className='py-40 text-center px-6 space-y-10'
 		>
-			<h3 className='statement-line text-5xl md:text-7xl font-light text-white'>
-				Better than noise.
-			</h3>
-
-			<h3 className='statement-line text-5xl md:text-7xl font-light text-white'>
-				Better than trends.
-			</h3>
-
-			<h3 className='statement-line text-6xl md:text-8xl font-semibold text-white'>
+			<h3 className='statement-line text-6xl md:text-8xl font-semibold uppercase text-white'>
 				Better than bad.
+			</h3>
+			<h3 className='statement-line text-5xl md:text-7xl font-light text-white'>
+				Because perfection is boring.
 			</h3>
 		</section>
 	)
