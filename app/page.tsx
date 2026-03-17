@@ -1,8 +1,7 @@
 'use client'
 
 import { useLayoutEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
+import { gsap, ScrollTrigger } from '@/lib/gsap'
 import Image from 'next/image'
 
 import Masonry from '@/components/Masonry'
@@ -20,6 +19,18 @@ export default function HomePage() {
 		if (!containerRef.current || !backgroundRef.current) return
 
 		const ctx = gsap.context(() => {
+			
+			gsap.to('.cinematic-bg', {
+				yPercent: -10,
+				ease: 'none',
+				scrollTrigger: {
+					trigger: containerRef.current,
+					start: 'top top',
+					end: 'bottom top',
+					scrub: true,
+				},
+			})
+			
 			// CINEMATIC BACKGROUND PARALLAX
 			gsap.to(backgroundRef.current, {
 				yPercent: -15, // slow upward movement
@@ -167,7 +178,7 @@ export default function HomePage() {
 			{/* Cinematic Parallax Background */}
 			<div
 				ref={backgroundRef}
-				className='fixed top-0 left-0 w-full h-full -z-10 bg-cinematic'
+				className='cinematic-bg fixed inset-0 -z-10 bg-cinematic'
 			/>
 
 			{/* HERO */}
@@ -208,7 +219,7 @@ export default function HomePage() {
 				<h3 className='statement-line text-5xl md:text-7xl font-light text-white'>
 					Better than trends.
 				</h3>
-				<h3 className='statement-line text-6xl md:text-8xl font-light text-white'>
+				<h3 className='statement-line text-6xl md:text-8xl font-semibold text-white'>
 					Better than bad.
 				</h3>
 			</section>
@@ -256,25 +267,8 @@ export default function HomePage() {
 			</section>
 
 			{/* ABOUT */}
-			<section className='py-40 px-6 max-w-4xl mx-auto text-white'>
+			<section className='py-40 px-6 mx-auto'>
 				<About />
-				<p className='mt-8 text-lg text-center'>
-					Better Than Bad Films is a studio founded by award-winning
-					director and creative strategist Julia Barrett-Mitchell.
-					Julia has led creative direction for internationally
-					recognized brands, produced viral content, and earned
-					accolades at major festivals for her original work. Her
-					background spans branded content campaigns, documentary, and
-					narrative filmmaking.
-				</p>
-				<p className='mt-6 text-lg text-center italic'>
-					So why call it Better Than Bad? The name is both a wink and
-					a manifesto. Because perfection is boring. It’s a rebellion
-					against ego and a reminder that the best creative work has
-					humor and humility. It’s a promise that the process can be
-					joyful, collaborative, and yes — better than bad. Possibly
-					even f*cking amazing.
-				</p>
 			</section>
 
 			{/* TESTIMONIALS */}
@@ -315,29 +309,14 @@ export default function HomePage() {
 
 			{/* COMPANY LOGOS */}
 			<section className='py-16 px-6 flex justify-center flex-wrap gap-12 items-center'>
-				{[
-					'Letterboxd',
-					'FemCap',
-					'Dead Oceans',
-					'Green Mountain Minerals',
-					'Rise Media',
-				].map((logo, i) => (
-					<div
-						key={i}
-						className='company-logo text-white text-xl font-semibold'
-					>
-						{logo}
-					</div>
-				))}
+				{/* TODO: Add company logos component */}
 			</section>
 
 			{/* CONTACT / CTA */}
-			<section className='py-40 px-6 text-center text-white'>
-				<h2 className='text-5xl md:text-7xl font-light mb-16'>
-					Let’s make something better than bad.
-				</h2>
+
+				
 				<ContactForm />
-			</section>
+
 		</main>
 	)
 }

@@ -65,10 +65,9 @@ export default function Masonry({ images, className = '' }: MasonryProps) {
 				ref={containerRef}
 				className={`
 				masonry
-				columns-2
-				md:columns-3
+				columns-3
 				lg:columns-4
-				gap-6
+				gap-4
 				p-2
 				max-w-6xl
 				${className}
