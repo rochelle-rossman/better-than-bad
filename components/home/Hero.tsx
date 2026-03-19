@@ -25,7 +25,8 @@ export default function Hero() {
 
 			gsap.to('.tagline', {
 				y: -45,
-				opacity: 0.6,
+				scale: 1.15,
+				// opacity: 0.6,
 				ease: 'none',
 				scrollTrigger: {
 					trigger: container.current,
@@ -49,6 +50,7 @@ export default function Hero() {
 				width={800}
 				height={400}
 				className="logo w-[60vw] h-auto mt-10"
+				priority
 			/>
 
 			<p className="tagline text-3xl md:text-4xl tracking-wide mt-6 text-white">
