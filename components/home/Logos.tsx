@@ -5,9 +5,24 @@ import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 
-const logos = [
-	'/logos/letterboxd-logo.png',
-	'/logos/femcap-logo.png',
+const clients = [
+	{ name: 'Letterboxd', logo: '/logos/letterboxd-logo.png' },
+	{
+		name: 'FemCap',
+		logo: '/logos/femcap-logo.jpeg',
+	},
+	{
+		name: 'Dead Oceans',
+		logo: '/logos/dead-oceans-logo.svg',
+	},
+	{
+		name: 'RiseMedia',
+		logo: '/logos/rise-media-logo.png',
+	},
+	{
+		name: 'Green Mountain Minerals',
+		logo: '/logos/green-mountain-logo.png',
+	},
 ]
 
 export default function Logos() {
@@ -33,19 +48,32 @@ export default function Logos() {
 	return (
 		<section
 			ref={container}
-			className='py-20 px-6 flex flex-wrap justify-center gap-12 items-center'
+			className='py-20 px-6'
 		>
-			{logos.map((logo, i) => (
-				<div key={i} className='rounded-lg'>
-					<Image
-						src={logo}
-						alt='Client logo'
-						width={120}
-						height={60}
-						className='client-logo'
-					/>
+			<div className='flex flex-col justify-center gap-4'>
+				<h3 className='text-white text-center uppercase font-heading text-3xl leading-relaxed tracking-wider'>
+					Trusted by
+				</h3>
+				<div
+					className='flex flex-wrap justify-center gap-4 items-center'
+				>
+					{clients.map((client, i) => (
+						<div
+							key={i}
+							className='rounded-lg bg-white p-4 flex items-center w-48 h-48 md:w-52 md:h-52'
+						>
+							<Image
+								src={client.logo}
+								alt={client.name + 'logo'}
+								title={client.name}
+								width={200}
+								height={200}
+								className='client-logo'
+							/>
+						</div>
+					))}
 				</div>
-			))}
+			</div>
 		</section>
 	)
 }

@@ -23,6 +23,7 @@ export default function FeaturedFilm({ project, onPlay }: FeaturedFilmProps) {
 						width={1920}
 						height={1080}
 						className='w-full h-auto object-cover transition duration-700 group-hover:scale-105'
+						priority
 					/>
 
 					<div className='absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition'>

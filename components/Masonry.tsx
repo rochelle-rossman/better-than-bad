@@ -42,7 +42,7 @@ export default function Masonry({ images, className = '' }: MasonryProps) {
 			},
 		})
 
-		// Scroll-based floating / parallax + random rotation
+		// Scroll-based floating / parallax
 		items.forEach((item) => {
 			const yDistance = gsap.utils.random(-20, -50) // vertical float
 
@@ -65,7 +65,8 @@ export default function Masonry({ images, className = '' }: MasonryProps) {
 				ref={containerRef}
 				className={`
 				masonry
-				columns-3
+				columns-2
+				md:columns-3
 				lg:columns-4
 				gap-4
 				p-2
