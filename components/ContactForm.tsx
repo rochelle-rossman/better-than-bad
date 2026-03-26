@@ -14,11 +14,7 @@ const initialState = { success: false, error: '' }
 function SubmitButton() {
 	const { pending } = useFormStatus()
 	return (
-		<Button
-			type='submit'
-			disabled={pending}
-			className='mt-10 w-full text-lg py-6 border border-white hover:bg-white hover:text-black transition-all duration-300'
-		>
+		<Button className='mt-10 w-full text-lg py-6 border rounded-full bg-transparent border-white hover:bg-white hover:text-black transition-all duration-300'>
 			{pending ? 'Sending...' : 'Send Message'}
 		</Button>
 	)
@@ -82,8 +78,11 @@ export default function ContactForm() {
 					</p>
 				</div>
 			:	<div className='max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center w-full'>
-					<div ref={leftRef} className='w-full md:max-w-1/2'>
-						<h2 className='text-6xl md:text-7xl leading-[0.9] font-semibold mb-8'>
+					<div
+						ref={leftRef}
+						className='w-full md:max-w-1/3'
+					>
+						<h2 className='text-5xl  leading-[0.9] font-semibold mb-8'>
 							Let’s make
 							<br />
 							something
@@ -113,7 +112,7 @@ export default function ContactForm() {
 								<Input
 									name='name'
 									required
-									className='bg-transparent border-none text-2xl px-0 focus-visible:ring-0'
+									className='form-field bg-transparent border-none text-2xl px-0 focus-visible:ring-0'
 								/>
 							</div>
 
@@ -125,7 +124,7 @@ export default function ContactForm() {
 									type='email'
 									name='email'
 									required
-									className='bg-transparent border-none text-2xl px-0 focus-visible:ring-0'
+									className='form-field bg-transparent border-none text-2xl px-0 focus-visible:ring-0'
 								/>
 							</div>
 
@@ -137,7 +136,7 @@ export default function ContactForm() {
 									name='message'
 									required
 									rows={4}
-									className='bg-transparent border-none text-2xl px-0 resize-none focus-visible:ring-0'
+									className='form-field bg-transparent border-none text-2xl px-0 resize-none focus-visible:ring-0'
 								/>
 							</div>
 

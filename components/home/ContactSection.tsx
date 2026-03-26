@@ -27,7 +27,7 @@ export default function ContactSection() {
 	return (
 		<section
 			ref={container}
-			className='px-6 max-w-4xl mx-auto text-center'
+			className='px-6 mx-auto text-center'
 		>
 			<div className='contact-inner'>
 

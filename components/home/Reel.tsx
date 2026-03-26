@@ -37,7 +37,7 @@ export default function Reel() {
 				loop
 				muted
 				playsInline
-				className='reel-video w-full h-auto object-cover'
+				className='reel-video w-full h-full object-cover'
 			>
 				<source
 					src='/website-reel.mp4'

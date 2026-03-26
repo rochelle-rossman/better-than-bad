@@ -42,7 +42,7 @@ export default function Hero() {
 	return (
 		<section
 			ref={container}
-			className="hero relative h-screen flex flex-col items-center justify-center text-center px-6"
+			className="hero relative h-screen flex flex-col items-center justify-center gap-6 text-center my-12 px-6"
 		>
 			<Image
 				src="/btbfilms.svg"
@@ -53,7 +53,7 @@ export default function Hero() {
 				priority
 			/>
 
-			<p className="tagline text-3xl md:text-4xl tracking-wide mt-6 text-white">
+			<p className="tagline text-3xl lg:text-4xl tracking-wide mt-6 text-white">
 				Cinematic craft with strategic precision.
 			</p>
 		</section>
