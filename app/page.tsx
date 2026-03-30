@@ -1,12 +1,12 @@
 'use client'
 
+import Gallery from '@/components/home/Gallery'
 import Hero from '@/components/home/Hero'
+import Logos from '@/components/home/Logos'
 import Reel from '@/components/home/Reel'
 import Services from '@/components/home/Services'
-import Gallery from '@/components/home/Gallery'
 import Testimonials from '@/components/home/Testimonials'
-import Logos from '@/components/home/Logos'
-import ContactSection from '@/components/home/ContactSection'
+import { SplitWordCTA } from '@/components/SplitWordCTA'
 import AboutTeaser from '@/components/home/About'
 
 export default function HomePage() {
@@ -41,7 +41,7 @@ export default function HomePage() {
 			</section>
 
 			<section className='relative z-10'>
-				<ContactSection />
+				<SplitWordCTA />
 			</section>
 		</main>
 	)

@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
+import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -87,17 +88,8 @@ export default function StatementsAbout() {
 			ref={container}
 			className='relative py-20 px-6 max-w-6xl mx-auto text-white overflow-hidden'
 		>
-			{/* Full-width heading */}
-			{/* <h2
-				ref={headingRef}
-				className='text-5xl font-semibold tracking-wider font-heading text-center mb-16'
-			>
-				So, why call it <em>Better Than Bad</em>?
-			</h2> */}
-
-
 			<div className='flex flex-col md:flex-row items-center gap-12'>
-				<div className='flex-1 text-center md:text-left space-y-6 md:space-y-8'>
+				<div className='text-center md:text-left space-y-6 md:space-y-8'>
 					<h3
 						ref={subheadingRef}
 						className='text-4xl md:text-5xl font-light'
@@ -115,18 +107,21 @@ export default function StatementsAbout() {
 						<em> better than bad</em>, blending humor, humility, and
 						strategic precision in every project.
 					</p>
-					<Link
-						href='/about'
-						className='inline-block mt-4 px-6 py-3 bg-light-mustard text-black font-semibold rounded-lg hover:opacity-90 transition'
-					>
-						Learn More
+					<Link href='/about'>
+						{/* <MagneticButton
+							label='Learn More'
+							className='inline-flex w-full items-center justify-center max-w-96 mt-4 px-6 py-3 bg-light-mustard text-black font-semibold rounded-full hover:opacity-90 transition'
+						/> */}
+						<Button className='inline-flex w-full items-center justify-center max-w-96 mt-4 px-6 py-3 bg-light-mustard text-black font-semibold rounded-full hover:opacity-90 transition'>
+							Read More
+						</Button>
 					</Link>
 				</div>
 
 				{/* Headshot */}
 				<div
 					ref={imageRef}
-					className='shrink-0 mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-lg'
+					className='flex-1 mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-lg'
 				>
 					<Image
 						src='/Julia-Headshot.png'

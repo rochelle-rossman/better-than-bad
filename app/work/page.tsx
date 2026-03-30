@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import WorkHero from '@/components/work/WorkHero'
+import { SplitWordCTA } from '@/components/SplitWordCTA'
 import FeaturedFilm from '@/components/work/FeaturedFilm'
-import WorkGrid from '@/components/work/WorkGrid'
 import VideoLightbox from '@/components/work/VideoLightbox'
+import WorkGrid from '@/components/work/WorkGrid'
+import WorkHero from '@/components/work/WorkHero'
 import { workProjects } from '@/lib/workProjects'
+import { useState } from 'react'
 
 export default function WorkPage() {
 	const [activeVideo, setActiveVideo] = useState<string | null>(null)
@@ -13,7 +14,6 @@ export default function WorkPage() {
 	return (
 		<main className='bg-black text-white'>
 			<WorkHero />
-			
 
 			<FeaturedFilm
 				project={workProjects[0]}
@@ -29,6 +29,7 @@ export default function WorkPage() {
 				url={activeVideo}
 				onClose={() => setActiveVideo(null)}
 			/>
+			<SplitWordCTA />
 		</main>
 	)
 }
