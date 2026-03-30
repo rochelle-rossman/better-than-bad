@@ -7,19 +7,19 @@ import { gsap } from '@/lib/gsap'
 const services = [
 	{
 		title: 'Creative Direction',
-		desc: 'Guiding your project’s vision from concept to execution with clarity and cinematic flair.',
+		desc: 'Shaping bold ideas into cohesive visual stories — from first spark to final frame.',
 	},
 	{
 		title: 'Creative Content Strategy',
-		desc: 'Developing campaigns and content that engage, resonate, and build meaningful connections.',
+		desc: 'Building campaigns that don’t just reach audiences, but stay with them.',
 	},
 	{
 		title: 'Video Production',
-		desc: 'Producing original, award-winning films, branded content, and social media-ready video that tells your story.',
+		desc: 'Crafting cinematic, story-driven video — from branded films to social-first content.',
 	},
 	{
 		title: 'Social Media Management',
-		desc: 'Amplifying your creative work across platforms with strategy, storytelling, and impact.',
+		desc: 'Turning content into momentum through thoughtful distribution and storytelling.',
 	},
 ]
 
@@ -28,17 +28,24 @@ export default function Services() {
 
 	useGSAP(
 		() => {
-			gsap.from('.service-card', {
-				opacity: 0,
-				y: 40,
-				stagger: 0.2,
-				duration: 1.1,
-				ease: 'power3.out',
-				scrollTrigger: {
-					trigger: container.current,
-					start: 'top 80%',
-				},
-			})
+			gsap.utils
+				.toArray<HTMLElement>('.service-row')
+				.forEach((row, i) => {
+					const isLeft = i % 2 === 0
+
+					gsap.from(row.querySelectorAll('.service-content > *'), {
+						opacity: 0,
+						y: 40,
+						x: isLeft ? -40 : 40,
+						stagger: 0.15,
+						duration: 1.1,
+						ease: 'power3.out',
+						scrollTrigger: {
+							trigger: row,
+							start: 'top 75%',
+						},
+					})
+				})
 		},
 		{ scope: container },
 	)
@@ -46,23 +53,39 @@ export default function Services() {
 	return (
 		<section
 			ref={container}
-			className='py-32 px-6 max-w-6xl mx-auto'
+			className='py-40 px-6 max-w-6xl mx-auto'
 		>
+			<div className='space-y-32'>
+				{services.map((service, i) => {
+					const isLeft = i % 2 === 0
 
-			<div className='grid md:grid-cols-2 gap-12 text-center'>
-				{services.map((service, i) => (
-					<div
-						key={i}
-						className='service-card p-8 bg-white/5 rounded-xl backdrop-blur hover:bg-white/10 transition'
-					>
-						<h3 className='text-3xl font-semibold mb-4 text-white'>
-							{service.title}
-						</h3>
-						<p className='text-white/80 leading-relaxed'>
-							{service.desc}
-						</p>
-					</div>
-				))}
+					return (
+						<div
+							key={i}
+							className={`service-row flex flex-col md:flex-row items-center gap-12 ${
+								!isLeft ? 'md:flex-row-reverse' : ''
+							}`}
+						>
+							{/* Index */}
+							<div className='text-6xl md:text-8xl font-light text-white/10'>
+								{String(i + 1).padStart(2, '0')}
+							</div>
+
+							{/* Content */}
+							<div className='service-content max-w-xl text-center md:text-left'>
+								<h3 className='text-4xl md:text-5xl font-semibold text-white mb-6'>
+									{service.title}
+								</h3>
+
+								<div className='h-px w-16 bg-white/30 mb-6 mx-auto md:mx-0' />
+
+								<p className='text-lg text-white/80 leading-relaxed'>
+									{service.desc}
+								</p>
+							</div>
+						</div>
+					)
+				})}
 			</div>
 		</section>
 	)

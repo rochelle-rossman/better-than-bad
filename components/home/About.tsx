@@ -9,29 +9,12 @@ import Link from 'next/link'
 
 export default function StatementsAbout() {
 	const container = useRef<HTMLDivElement>(null)
-	const headingRef = useRef<HTMLHeadingElement>(null)
 	const subheadingRef = useRef<HTMLHeadingElement>(null)
 	const paragraphRef = useRef<HTMLParagraphElement>(null)
 	const imageRef = useRef<HTMLDivElement>(null)
 
 	useGSAP(
 		() => {
-			gsap.fromTo(
-				headingRef.current,
-				{ opacity: 0, y: -30 },
-				{
-					opacity: 1,
-					y: 0,
-					duration: 1,
-					ease: 'power3.out',
-					scrollTrigger: {
-						trigger: headingRef.current,
-						start: 'top 90%',
-						end: 'top 60%',
-					},
-				},
-			)
-
 			gsap.fromTo(
 				subheadingRef.current,
 				{ opacity: 0, y: 30 },
@@ -108,10 +91,6 @@ export default function StatementsAbout() {
 						strategic precision in every project.
 					</p>
 					<Link href='/about'>
-						{/* <MagneticButton
-							label='Learn More'
-							className='inline-flex w-full items-center justify-center max-w-96 mt-4 px-6 py-3 bg-light-mustard text-black font-semibold rounded-full hover:opacity-90 transition'
-						/> */}
 						<Button className='inline-flex w-full items-center justify-center max-w-96 mt-4 px-6 py-3 bg-light-mustard text-black font-semibold rounded-full hover:opacity-90 transition'>
 							Read More
 						</Button>
@@ -121,14 +100,14 @@ export default function StatementsAbout() {
 				{/* Headshot */}
 				<div
 					ref={imageRef}
-					className='flex-1 mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-lg'
+					className='mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-lg'
 				>
 					<Image
 						src='/Julia-Headshot.png'
 						alt='Julia Barrett-Mitchell'
-						width={240}
-						height={240}
-						className='w-full h-full object-cover'
+						width={340}
+						height={340}
+						className='w-full h-full  object-cover'
 					/>
 				</div>
 			</div>
