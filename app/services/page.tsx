@@ -3,10 +3,9 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
+
 import Link from 'next/link'
 
-gsap.registerPlugin(ScrollTrigger)
 
 const services = [
 	{
@@ -122,16 +121,16 @@ export default function ServicesPage() {
 			className='text-white'
 		>
 			<section className='min-h-[80vh] flex items-center px-6 md:px-12'>
-				<div className='my-24 max-w-6xl mx-auto w-full flex flex-col items-center gap-6'>
-					<p className='service-eyebrow text-xs uppercase tracking-[0.35em] opacity-60 mb-6'>
+				<div className='my-24 max-w-6xl mx-auto w-full flex flex-col items-center gap-6 text-center'>
+					<h1 className='service-eyebrow text-sm uppercase tracking-[0.35em] opacity-60 mb-6'>
 						Services
-					</p>
-					<h1 className='text-6xl md:text-8xl leading-[0.95] font-semibold max-w-5xl'>
-						What we make should feel
+					</h1>
+					<h2 className='text-4xl md:text-6xl leading-[0.95] font-semibold max-w-5xl'>
+						What we make should <em className='italic'>feel</em>
 						<br />
 						as considered as it looks.
-					</h1>
-					<p className='mt-8 max-w-2xl text-xl md:text-2xl opacity-80'>
+					</h2>
+					<p className='mt-8 max-w-2xl text-lg md:text-xl opacity-80'>
 						Each service gets its own scene, its own pacing, and its
 						own moment to land.
 					</p>
