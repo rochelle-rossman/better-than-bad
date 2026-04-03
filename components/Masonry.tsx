@@ -3,7 +3,7 @@
 import { useLayoutEffect, useRef } from 'react'
 import Image, { StaticImageData } from 'next/image'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
+// import { ScrollTrigger } from 'gsap/all'
 
 type MasonryImage = {
 	src: StaticImageData
@@ -15,7 +15,7 @@ interface MasonryProps {
 	className?: string
 }
 
-gsap.registerPlugin(ScrollTrigger)
+// gsap.registerPlugin(ScrollTrigger)
 
 export default function Masonry({ images, className = '' }: MasonryProps) {
 	const containerRef = useRef<HTMLDivElement>(null)

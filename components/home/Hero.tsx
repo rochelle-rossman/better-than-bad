@@ -6,35 +6,42 @@ import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 
 export default function Hero() {
+	
 	const container = useRef<HTMLDivElement>(null)
 
 	useGSAP(
 		() => {
-			gsap.to('.logo', {
-				y: -30,
-				scale: 1.15,
-				opacity: 0.6,
-				ease: 'none',
+			const tl = gsap.timeline({
 				scrollTrigger: {
 					trigger: container.current,
-					start: 'top top',
+					start: 'top top+=10%',
 					end: 'bottom top',
-					scrub: true,
+					scrub: 1.2,
+					pin: true,
+					anticipatePin: 1,
 				},
 			})
-
-			gsap.to('.tagline', {
-				y: -45,
-				scale: 1.15,
-				// opacity: 0.6,
-				ease: 'none',
-				scrollTrigger: {
-					trigger: container.current,
-					start: 'top center',
-					end: 'bottom top',
-					scrub: true,
+			
+			tl.fromTo(
+				'.logo',
+				{ y: 0, opacity: 1 },
+				{
+					y: -30,
+					scale: 0.8,
+					opacity: 0.8,
+					ease: 'none',
 				},
-			})
+			).fromTo(
+				'.tagline',
+				{ y: 0, scale: 0.8, opacity: 0.8 },
+				{
+					y: -45,
+					scale: 1.15,
+					opacity: 1,
+					ease: 'none',
+				},
+				0,
+			)
 		},
 		{ scope: container }
 	)
@@ -42,18 +49,18 @@ export default function Hero() {
 	return (
 		<section
 			ref={container}
-			className="hero relative h-screen flex flex-col items-center justify-center gap-6 text-center my-12 px-6"
+			className="relative h-screen flex flex-col items-center justify-center text-center px-6"
 		>
 			<Image
 				src="/btbfilms.svg"
 				alt="Better Than Bad Films Logo"
 				width={800}
 				height={400}
-				className="logo w-[60vw] h-auto mt-10"
+				className="logo max-w-[60vw] h-auto"
 				priority
 			/>
 
-			<p className="tagline text-3xl lg:text-4xl tracking-wide mt-6 text-white">
+			<p className="tagline text-3xl lg:text-4xl tracking-wide text-white">
 				Cinematic craft with strategic precision.
 			</p>
 		</section>

@@ -24,7 +24,7 @@ export function SplitWordCTA() {
 				defaults: { ease: 'power3.out' },
 				scrollTrigger: {
 					trigger: containerRef.current,
-					start: 'top 70%',
+					start: 'top top',
 				},
 			})
 

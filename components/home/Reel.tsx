@@ -11,15 +11,16 @@ export default function Reel() {
 		() => {
 			gsap.fromTo(
 				'.reel-video',
-				{ opacity: 0, y: 30 },
+				{ opacity: 0.8, y: 10 },
 				{
 					opacity: 1,
 					y: 0,
 					scrollTrigger: {
 						trigger: container.current,
-						start: 'top 80%',
-						end: 'top 30%',
-						scrub: true,
+						start: 'top top',
+						scrub: 1.2,
+						pin: true,
+						anticipatePin: 1,
 					},
 				},
 			)
@@ -30,14 +31,15 @@ export default function Reel() {
 	return (
 		<section
 			ref={container}
-			className='reel relative min-h-[110vh] justify-center'
+			className='reel relative h-dvh w-full overflow-hidden'
 		>
 			<video
 				autoPlay
 				loop
 				muted
 				playsInline
-				className='reel-video w-full h-full object-cover'
+				preload='metadata'
+				className='reel-video absolute inset-0 w-full h-full object-cover'
 			>
 				<source
 					src='/website-reel.mp4'
