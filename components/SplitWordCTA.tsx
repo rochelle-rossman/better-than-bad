@@ -62,7 +62,7 @@ export function SplitWordCTA() {
 	return (
 		<section
 			ref={containerRef}
-			className='py-32 text-white text-center flex flex-col gap-8 items-center justify-center px-6 min-h-[80vh]'
+			className='py-32 text-white text-center flex flex-col gap-8 items-center justify-start px-6 min-h-[80vh]'
 		>
 			<h2
 				ref={textRef}

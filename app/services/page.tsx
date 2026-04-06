@@ -6,7 +6,6 @@ import { gsap } from '@/lib/gsap'
 
 import Link from 'next/link'
 
-
 const services = [
 	{
 		title: 'Creative Direction',
@@ -48,9 +47,11 @@ const services = [
 
 export default function ServicesPage() {
 	const container = useRef<HTMLDivElement>(null)
+	const panelsRef = useRef<HTMLElement[]>([])
 
 	useGSAP(
 		() => {
+			if (!container.current || !panelsRef.current) return
 			const panels = gsap.utils.toArray<HTMLElement>('.service-panel')
 
 			panels.forEach((panel) => {
@@ -122,10 +123,10 @@ export default function ServicesPage() {
 		>
 			<section className='min-h-[80vh] flex items-center px-6 md:px-12'>
 				<div className='my-24 max-w-6xl mx-auto w-full flex flex-col items-center gap-6 text-center'>
-					<h1 className='service-eyebrow text-sm uppercase tracking-[0.35em] opacity-60 mb-6'>
+					<h1 className='service-eyebrow text-sm uppercase tracking-[0.35em] opacity-60 mb-16'>
 						Services
 					</h1>
-					<h2 className='text-4xl md:text-6xl leading-[0.95] font-semibold max-w-5xl'>
+					<h2 className='text-4xl md:text-5xl lg:text-6xl leading-[0.95] font-semibold max-w-5xl'>
 						What we make should <em className='italic'>feel</em>
 						<br />
 						as considered as it looks.
@@ -140,6 +141,9 @@ export default function ServicesPage() {
 			{services.map((service, index) => (
 				<section
 					key={service.title}
+					ref={(el) => {
+						if (el) panelsRef.current[index] = el
+					}}
 					className='service-panel min-h-screen px-6 py-2 md:px-12 border-t border-white/10'
 				>
 					<div className='max-w-7xl mx-auto h-screen grid md:grid-cols-[1.2fr_0.8fr] gap-12 items-center'>

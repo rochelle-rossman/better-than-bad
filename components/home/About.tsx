@@ -5,7 +5,6 @@ import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import Link from 'next/link'
 
 export default function StatementsAbout() {
 	const container = useRef<HTMLDivElement>(null)
@@ -71,12 +70,13 @@ export default function StatementsAbout() {
 			ref={container}
 			className='relative py-20 px-6 max-w-6xl mx-auto text-white overflow-hidden'
 		>
-			<div className='flex flex-col md:flex-row items-center gap-12'>
+			<div className='flex flex-col md:flex-row  gap-12'>
 				<div className='text-center md:text-left space-y-6 md:space-y-8'>
 					<h3
 						ref={subheadingRef}
-						className='text-4xl md:text-5xl font-light'
-					>
+						className='text-3xl md:text-4xl font-light'
+					> So, why call it &quot;Better Than Bad&quot;?
+						<br />
 						Because perfection is boring.
 					</h3>
 					<p
@@ -90,11 +90,11 @@ export default function StatementsAbout() {
 						<em> better than bad</em>, blending humor, humility, and
 						strategic precision in every project.
 					</p>
-					<Link href='/about'>
+					<a href='/about'>
 						<Button className='inline-flex w-full items-center justify-center max-w-96 mt-4 px-6 py-3 bg-light-mustard text-black font-semibold rounded-full hover:opacity-90 transition'>
 							Read More
 						</Button>
-					</Link>
+					</a>
 				</div>
 
 				{/* Headshot */}
@@ -107,7 +107,7 @@ export default function StatementsAbout() {
 						alt='Julia Barrett-Mitchell'
 						width={340}
 						height={340}
-						className='w-full h-full  object-cover'
+						className='w-full h-full lg:max-h-96 object-cover'
 					/>
 				</div>
 			</div>

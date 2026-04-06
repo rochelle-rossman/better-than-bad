@@ -60,7 +60,7 @@ export default function Logos() {
 					{clients.map((client, i) => (
 						<div
 							key={i}
-							className='rounded-lg bg-white p-4 flex items-center w-48 h-48 md:w-52 md:h-52'
+							className='rounded-lg bg-white p-4 flex items-center w-36 h-36 md:w-48 md:h-48'
 						>
 							<Image
 								src={client.logo}

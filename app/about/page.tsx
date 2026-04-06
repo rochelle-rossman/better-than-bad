@@ -1,6 +1,5 @@
 'use client'
 
-import CinematicBackground from '@/components/home/CinematicBackground'
 import { SplitWordCTA } from '@/components/SplitWordCTA'
 import { gsap } from '@/lib/gsap'
 import Image from 'next/image'
@@ -37,14 +36,16 @@ export default function AboutPage() {
 	}, [])
 	return (
 		<>
-			<CinematicBackground />
 			<section
 				ref={sectionRef}
-				className='py-40 px-6 relative max-w-6xl mx-auto text-light-mustard'
+				className='py-40 px-6 relative max-w-6xl mx-auto text-white'
 			>
+				<h1 className='text-sm uppercase tracking-[0.35em] opacity-60 mb-16'>
+					About
+				</h1>
 				<h2
 					ref={headingRef}
-					className='text-5xl md:text-6xl font-semibold text-center tracking-wider font-heading mb-16'
+					className='text-5xl md:text-6xl font-semibold text-center tracking-wider font-heading mb-16 text-light-mustard'
 				>
 					So, why call it <em>Better Than Bad</em>?
 				</h2>

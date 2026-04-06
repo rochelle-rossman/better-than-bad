@@ -56,7 +56,7 @@ export default function Hero() {
 				alt="Better Than Bad Films Logo"
 				width={800}
 				height={400}
-				className="logo max-w-[60vw] h-auto"
+				className="logo md:max-w-[60vw] h-auto"
 				priority
 			/>
 
