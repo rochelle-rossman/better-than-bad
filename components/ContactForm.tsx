@@ -61,7 +61,7 @@ export default function ContactForm() {
 	return (
 		<section
 			ref={containerRef}
-			className='w-full px-6 md:px-12 py-32 text-white relative min-h-[80vh] flex items-center justify-center'
+			className='w-full px-4 md:px-10  text-white  flex items-center justify-center'
 			id='contact'
 		>
 			{state.success ?
@@ -77,22 +77,16 @@ export default function ContactForm() {
 						something interesting.
 					</p>
 				</div>
-			:	<div className='max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center w-full'>
+			:	<div className='max-w-5xl mx-auto flex flex-col gap-12 items-center w-full'>
 					<div
 						ref={leftRef}
-						className='w-full md:max-w-1/3'
+						className='w-full'
 					>
-						<h2 className='text-5xl  leading-[0.9] font-semibold mb-8'>
-							Let’s make
-							<br />
-							something
-							<br />
-							better
-							<br />
-							than bad.
+						<h2 className='text-4xl lg:text-5xl leading-[1.2] font-semibold mb-6'>
+							Let’s make something better than bad.
 						</h2>
-						<p className='text-xl  max-w-md opacity-80'>
-							If you’re tired of safe, predictable work—we’ll get
+						<p className='text-lg lg:text-xl opacity-80'>
+							If you’re tired of safe, predictable work — we’ll get
 							along just fine.
 						</p>
 					</div>

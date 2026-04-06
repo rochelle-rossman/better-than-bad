@@ -14,7 +14,13 @@ const navItems = [
 	{ label: 'Services', href: '/services' },
 ]
 
-const socialItems = [{ label: 'Instagram', href: '#', icon: <FaInstagram /> }]
+const socialItems = [
+	{
+		label: 'Instagram',
+		href: 'https://www.instagram.com/betterthanbadfilms/',
+		icon: <FaInstagram />,
+	},
+]
 
 const layerColors = [
 	'#330520',
@@ -32,7 +38,6 @@ export default function StaggeredMenu() {
 	const panelRef = useRef<HTMLDivElement>(null)
 	const layersRef = useRef<HTMLDivElement[]>([])
 	const navRefs = useRef<HTMLAnchorElement[]>([])
-	const socialRefs = useRef<HTMLAnchorElement[]>([])
 	const iconRef = useRef<HTMLDivElement>(null)
 	const buttonRef = useRef<HTMLButtonElement>(null)
 
@@ -46,10 +51,6 @@ export default function StaggeredMenu() {
 				opacity: 0,
 			})
 
-			gsap.set(socialRefs.current, {
-				y: 20,
-				opacity: 0,
-			})
 
 			const tl = gsap.timeline({ paused: true })
 
@@ -79,18 +80,6 @@ export default function StaggeredMenu() {
 					stagger: 0.08,
 					duration: 0.7,
 					ease: 'power4.out',
-				},
-				'-=0.4',
-			)
-
-			tl.to(
-				socialRefs.current,
-				{
-					y: 0,
-					opacity: 1,
-					stagger: 0.06,
-					duration: 0.4,
-					ease: 'power3.out',
 				},
 				'-=0.4',
 			)
@@ -132,23 +121,8 @@ export default function StaggeredMenu() {
 
 			const duration = tl.duration() * 1000
 
-			// Check if it's a same-page hash link
-			const isSamePageLink = href.includes('#')
-
 			setTimeout(() => {
-				if (isSamePageLink) {
-					// Extract the hash from the href
-					const hash =
-						href.includes('/#') ?
-							href.split('/#')[1]
-						:	href.split('#')[1]
-					const element = document.getElementById(hash)
-					if (element) {
-						element.scrollIntoView({ behavior: 'smooth' })
-					}
-				} else {
-					router.push(href)
-				}
+				router.push(href)
 			}, duration)
 		}
 
@@ -215,7 +189,7 @@ export default function StaggeredMenu() {
 								if (el) navRefs.current[i] = el
 							}}
 							onClick={handleNavClick(item.href)}
-							className='text-6xl tracking-wider uppercase text-deep-mauve hover:text-primary flex w-min'
+							className='text-4xl md:text-5xl tracking-wider uppercase text-deep-mauve hover:text-primary flex w-min'
 						>
 							{item.label}
 							<span className='ml-2 text-sm'>{i + 1}</span>
@@ -228,10 +202,8 @@ export default function StaggeredMenu() {
 						<a
 							key={i}
 							href={item.href}
-							ref={(el) => {
-								if (el) socialRefs.current[i] = el
-							}}
-							onClick={handleNavClick(item.href)}
+							target='_blank'
+							rel='noopener noreferrer'
 						>
 							<span className='text-3xl'>{item.icon}</span>
 						</a>

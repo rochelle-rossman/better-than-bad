@@ -15,8 +15,6 @@ interface MasonryProps {
 	className?: string
 }
 
-// gsap.registerPlugin(ScrollTrigger)
-
 export default function Masonry({ images, className = '' }: MasonryProps) {
 	const containerRef = useRef<HTMLDivElement>(null)
 
@@ -65,19 +63,18 @@ export default function Masonry({ images, className = '' }: MasonryProps) {
 				ref={containerRef}
 				className={`
 				masonry
-				columns-2
-				md:columns-3
-				lg:columns-4
-				gap-4
+				columns-3
+				md:columns-4
+				gap-2
 				p-2
-				max-w-6xl
+				max-w-5xl
 				${className}
 				`}
 			>
 				{images.map((img, i) => (
 					<div
 						key={i}
-						className='masonry-item mb-6 break-inside-avoid overflow-hidden rounded-2xl relative group'
+						className='masonry-item mb-2 break-inside-avoid overflow-hidden rounded-2xl relative group'
 					>
 						<Image
 							src={img.src}
