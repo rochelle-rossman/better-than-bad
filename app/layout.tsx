@@ -22,6 +22,22 @@ export const metadata: Metadata = {
 	title: 'Better Than Bad Films',
 	description:
 		'Award-winning creative direction, cinematic video production, and social content strategy for brands and storytellers.',
+	openGraph: {
+		title: 'Better Than Bad Films',
+		description:
+			'Award-winning creative direction, cinematic video production, and social content strategy for brands and storytellers.',
+		url: 'https://www.betterthanbadfilms.com',
+		siteName: 'Better Than Bad Films',
+		images: [
+			{
+				url: '/btb-logo-text.png',
+				width: 1200,
+				height: 630,
+				alt: 'Better Than Bad Films - Creative Direction and Video Production',
+			},
+		],
+		type: 'website',
+	},
 }
 
 export default function RootLayout({
