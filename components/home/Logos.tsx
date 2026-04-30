@@ -30,7 +30,9 @@ export default function Logos() {
 
 	useGSAP(
 		() => {
-			gsap.from('.client-logo', {
+			const mm = gsap.matchMedia()
+			mm.add('(prefers-reduced-motion: no-preference)', () => {
+				gsap.from('.client-logo', {
 				opacity: 0,
 				y: 20,
 				stagger: 0.15,
@@ -40,7 +42,14 @@ export default function Logos() {
 					trigger: container.current,
 					start: 'top 90%',
 				},
+			
+		})		})
+
+			mm.add('(prefers-reduced-motion: reduce)', () => {
+				gsap.set('.client-logo', { opacity: 1, y: 0 })
 			})
+
+			return () => mm.revert()
 		},
 		{ scope: container },
 	)
@@ -48,7 +57,7 @@ export default function Logos() {
 	return (
 		<section
 			ref={container}
-			className='py-20 px-6'
+			className='py-20 px-4'
 		>
 			<div className='flex flex-col justify-center gap-4'>
 				<h3 className='text-white text-center uppercase font-heading text-3xl leading-relaxed tracking-wider'>

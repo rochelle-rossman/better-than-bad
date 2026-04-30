@@ -1,8 +1,8 @@
 'use client'
 
-import { useRef } from 'react'
-import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
+import { useGSAP } from '@gsap/react'
+import { useRef } from 'react'
 
 const services = [
 	{
@@ -28,24 +28,45 @@ export default function Services() {
 
 	useGSAP(
 		() => {
-			gsap.utils
-				.toArray<HTMLElement>('.service-row')
-				.forEach((row, i) => {
-					const isLeft = i % 2 === 0
+			const mm = gsap.matchMedia()
 
-					gsap.from(row.querySelectorAll('.service-content > *'), {
-						opacity: 0,
-						y: 40,
-						x: isLeft ? -40 : 40,
-						stagger: 0.15,
-						duration: 1.1,
-						ease: 'power3.out',
-						scrollTrigger: {
-							trigger: row,
-							start: 'top 75%',
-						},
+			mm.add('(prefers-reduced-motion: no-preference)', () => {
+				gsap.utils
+					.toArray<HTMLElement>('.service-row')
+					.forEach((row, i) => {
+						const isLeft = i % 2 === 0
+
+						gsap.from(
+							row.querySelectorAll('.service-content > *'),
+							{
+								opacity: 0,
+								y: 40,
+								x: isLeft ? -40 : 40,
+								stagger: 0.15,
+								duration: 1.1,
+								ease: 'power3.out',
+								scrollTrigger: {
+									trigger: row,
+									start: 'top 75%',
+								},
+							},
+						)
 					})
-				})
+			})
+
+			mm.add('(prefers-reduced-motion: reduce)', () => {
+				gsap.utils
+					.toArray<HTMLElement>('.service-row')
+					.forEach((row) => {
+						gsap.set(row.querySelectorAll('.service-content > *'), {
+							opacity: 1,
+							y: 0,
+							x: 0,
+						})
+					})
+			})
+
+			return () => mm.revert()
 		},
 		{ scope: container },
 	)

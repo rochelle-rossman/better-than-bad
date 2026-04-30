@@ -1,16 +1,16 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
 import { gsap } from 'gsap'
 import { useRouter } from 'next/navigation'
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { FaInstagram } from 'react-icons/fa'
-import { Button } from '@/components/ui/button'
 
 const navItems = [
 	{ label: 'Home', href: '/' },
 	{ label: 'About', href: '/about' },
 	{ label: 'Contact', href: '/contact' },
-	{ label: 'Featured Work', href: '/work' },
+	{ label: 'Featured Works', href: '/work' },
 	{ label: 'Services', href: '/services' },
 ]
 
@@ -42,67 +42,104 @@ export default function StaggeredMenu() {
 	const buttonRef = useRef<HTMLButtonElement>(null)
 
 	const tlRef = useRef<gsap.core.Timeline | null>(null)
+	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	useLayoutEffect(() => {
-		const ctx = gsap.context(() => {
-			gsap.set(navRefs.current, {
-				y: 40,
-				rotate: 6,
-				opacity: 0,
-			})
+		const mm = gsap.matchMedia()
 
+		mm.add('(prefers-reduced-motion: no-preference)', () => {
+			const ctx = gsap.context(() => {
+				gsap.set(navRefs.current, {
+					y: 40,
+					rotate: 6,
+					opacity: 0,
+				})
 
-			const tl = gsap.timeline({ paused: true })
+				const tl = gsap.timeline({ paused: true })
 
-			tl.to(layersRef.current, {
-				right: 0,
-				duration: 0.5,
-				stagger: 0.08,
-				ease: 'power4.out',
-			})
-
-			tl.to(
-				panelRef.current,
-				{
+				tl.to(layersRef.current, {
 					right: 0,
 					duration: 0.5,
-					ease: 'power4.out',
-				},
-				'-=0.3',
-			)
-
-			tl.to(
-				navRefs.current,
-				{
-					y: 0,
-					rotate: 0,
-					opacity: 1,
 					stagger: 0.08,
-					duration: 0.7,
 					ease: 'power4.out',
-				},
-				'-=0.4',
-			)
+				})
 
-			tl.to(iconRef.current, { rotate: 45, duration: 0.3 }, 0)
+				tl.to(
+					panelRef.current,
+					{
+						right: 0,
+						duration: 0.5,
+						ease: 'power4.out',
+					},
+					'-=0.3',
+				)
 
-			tlRef.current = tl
+				tl.to(
+					navRefs.current,
+					{
+						y: 0,
+						rotate: 0,
+						opacity: 1,
+						stagger: 0.08,
+						duration: 0.7,
+						ease: 'power4.out',
+					},
+					'-=0.4',
+				)
 
-			// Start closed
-			tl.reverse()
-		}, panelRef)
+				tl.to(iconRef.current, { rotate: 45, duration: 0.3 }, 0)
 
-		return () => ctx.revert()
+				tlRef.current = tl
+
+				// Start closed
+				tl.reverse()
+			}, panelRef)
+
+			return () => ctx.revert()
+		})
+
+		mm.add('(prefers-reduced-motion: reduce)', () => {
+			const ctx = gsap.context(() => {
+				// Set initial state: hidden
+				gsap.set(layersRef.current, { right: '-100%' })
+				gsap.set(panelRef.current, { right: '-100%' })
+				gsap.set(navRefs.current, { y: 0, rotate: 0, opacity: 0 })
+				gsap.set(iconRef.current, { rotate: 0 })
+			}, panelRef)
+
+			tlRef.current = null
+			return () => ctx.revert()
+		})
+
+		return () => mm.revert()
 	}, [])
 
 	const toggleMenu = () => {
 		const tl = tlRef.current
-		if (!tl) return
 
-		if (tl.reversed()) {
-			tl.play()
+		if (tl) {
+			// With animations
+			if (tl.reversed()) {
+				tl.play()
+			} else {
+				tl.reverse()
+			}
 		} else {
-			tl.reverse()
+			// Without animations (reduced motion)
+			const newState = !isMenuOpen
+			setIsMenuOpen(newState)
+
+			if (newState) {
+				gsap.set(layersRef.current, { right: 0 })
+				gsap.set(panelRef.current, { right: 0 })
+				gsap.set(navRefs.current, { opacity: 1 })
+				gsap.set(iconRef.current, { rotate: 45 })
+			} else {
+				gsap.set(layersRef.current, { right: '-100%' })
+				gsap.set(panelRef.current, { right: '-100%' })
+				gsap.set(navRefs.current, { opacity: 0 })
+				gsap.set(iconRef.current, { rotate: 0 })
+			}
 		}
 	}
 
@@ -110,41 +147,66 @@ export default function StaggeredMenu() {
 		(href: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
 			e.preventDefault()
 			const tl = tlRef.current
-			if (!tl) {
+
+			if (tl) {
+				// With animations
+				if (!tl.reversed()) {
+					tl.reverse()
+				}
+				const duration = tl.duration() * 1000
+				setTimeout(() => {
+					router.push(href)
+				}, duration)
+			} else {
+				// Without animations (reduced motion)
+				setIsMenuOpen(false)
+				gsap.set(layersRef.current, { right: '-100%' })
+				gsap.set(panelRef.current, { right: '-100%' })
+				gsap.set(navRefs.current, { opacity: 0 })
+				gsap.set(iconRef.current, { rotate: 0 })
 				router.push(href)
-				return
 			}
-
-			if (!tl.reversed()) {
-				tl.reverse()
-			}
-
-			const duration = tl.duration() * 1000
-
-			setTimeout(() => {
-				router.push(href)
-			}, duration)
 		}
 
 	// Outside click
 	useEffect(() => {
 		function handleClick(e: MouseEvent) {
 			const tl = tlRef.current
-			if (!tl || tl.reversed()) return
 
-			if (
-				panelRef.current &&
-				!panelRef.current.contains(e.target as Node) &&
-				buttonRef.current &&
-				!buttonRef.current.contains(e.target as Node)
-			) {
-				tl.reverse()
+			if (tl) {
+				// With animations
+				if (tl.reversed()) return
+
+				if (
+					panelRef.current &&
+					!panelRef.current.contains(e.target as Node) &&
+					buttonRef.current &&
+					!buttonRef.current.contains(e.target as Node)
+				) {
+					tl.reverse()
+				}
+			} else {
+				// Without animations (reduced motion)
+				if (!isMenuOpen) return
+
+				if (
+					panelRef.current &&
+					!panelRef.current.contains(e.target as Node) &&
+					buttonRef.current &&
+					!buttonRef.current.contains(e.target as Node)
+				) {
+					setIsMenuOpen(false)
+					gsap.set(layersRef.current, { right: '-100%' })
+					gsap.set(panelRef.current, { right: '-100%' })
+					gsap.set(navRefs.current, { opacity: 0 })
+					gsap.set(iconRef.current, { rotate: 0 })
+				}
 			}
 		}
 
 		document.addEventListener('mousedown', handleClick)
 		return () => document.removeEventListener('mousedown', handleClick)
-	}, [])
+	}, [isMenuOpen])
 
 	return (
 		<>
