@@ -11,7 +11,7 @@ type FeaturedFilmProps = {
 
 export default function FeaturedFilm({ project, onPlay }: FeaturedFilmProps) {
 	return (
-		<section className='px-6 pb-32'>
+		<section className='px-4 pb-32'>
 			<div className='max-w-6xl mx-auto space-y-6'>
 				<button
 					onClick={() => onPlay(project.videoUrl)}

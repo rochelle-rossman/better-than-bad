@@ -53,65 +53,82 @@ export default function ServicesPage() {
 		() => {
 			if (!container.current || !panelsRef.current) return
 			const panels = gsap.utils.toArray<HTMLElement>('.service-panel')
+			
+			const mm = gsap.matchMedia()
+			mm.add('(prefers-reduced-motion: no-preference)', () => {
+				panels.forEach((panel) => {
+					const title =
+						panel.querySelector<HTMLElement>('.service-title')
+					const desc =
+						panel.querySelector<HTMLElement>('.service-desc')
+					const points =
+						panel.querySelectorAll<HTMLElement>('.service-point')
+					const eyebrow =
+						panel.querySelector<HTMLElement>('.service-eyebrow')
 
-			panels.forEach((panel) => {
-				const title = panel.querySelector<HTMLElement>('.service-title')
-				const desc = panel.querySelector<HTMLElement>('.service-desc')
-				const points =
-					panel.querySelectorAll<HTMLElement>('.service-point')
-				const eyebrow =
-					panel.querySelector<HTMLElement>('.service-eyebrow')
+					const tl = gsap.timeline({
+						scrollTrigger: {
+							trigger: panel,
+							start: 'top top',
+							end: '+=110%',
+							pin: true,
+							scrub: false,
+							toggleActions: 'play none none none',
+							invalidateOnRefresh: true,
+						},
+					})
 
-				const tl = gsap.timeline({
-					scrollTrigger: {
-						trigger: panel,
-						start: 'top top',
-						end: '+=110%',
-						pin: true,
-						scrub: false,
-						toggleActions: 'play none none none',
-						invalidateOnRefresh: true,
-					},
+					tl.from(eyebrow, {
+						y: 24,
+						opacity: 0,
+						duration: 0.5,
+						ease: 'power2.out',
+					})
+						.from(
+							title,
+							{
+								y: 80,
+								opacity: 0,
+								duration: 0.8,
+								ease: 'power3.out',
+							},
+							'-=0.2',
+						)
+						.from(
+							desc,
+							{
+								y: 30,
+								opacity: 0,
+								duration: 0.5,
+								ease: 'power3.out',
+							},
+							'-=0.55',
+						)
+						.from(
+							points,
+							{
+								y: 24,
+								opacity: 0,
+								stagger: 0.06,
+								duration: 0.4,
+								ease: 'power2.out',
+							},
+							'-=0.45',
+						)
 				})
-
-				tl.from(eyebrow, {
-					y: 24,
-					opacity: 0,
-					duration: 0.5,
-					ease: 'power2.out',
-				})
-					.from(
-						title,
-						{
-							y: 80,
-							opacity: 0,
-							duration: 0.8,
-							ease: 'power3.out',
-						},
-						'-=0.2',
-					)
-					.from(
-						desc,
-						{
-							y: 30,
-							opacity: 0,
-							duration: 0.5,
-							ease: 'power3.out',
-						},
-						'-=0.55',
-					)
-					.from(
-						points,
-						{
-							y: 24,
-							opacity: 0,
-							stagger: 0.06,
-							duration: 0.4,
-							ease: 'power2.out',
-						},
-						'-=0.45',
-					)
 			})
+			
+			mm.add('(prefers-reduced-motion: reduce)', () => {
+				panels.forEach((panel) => {
+					gsap.set(panel.querySelectorAll('.service-eyebrow, .service-title, .service-desc, .service-point'), {
+						opacity: 1,
+						y: 0,
+					})
+				})
+			})
+
+			return () => mm.revert()
+			
 		},
 		{ scope: container },
 	)
