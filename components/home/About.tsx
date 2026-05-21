@@ -74,10 +74,12 @@ export default function StatementsAbout() {
 				<div className='text-center md:text-left space-y-6 md:space-y-8'>
 					<h3
 						ref={subheadingRef}
-						className='text-3xl md:text-4xl font-light'
-					> So, why call it &quot;Better Than Bad&quot;?
+						className='text-2xl font-light'
+					>
+						{' '}
+						So, why call it &quot;Better Than Bad&quot;?
 						<br />
-						Because perfection is boring.
+						<span className='text-3xl mt-2'>Because perfection is boring.</span>
 					</h3>
 					<p
 						ref={paragraphRef}

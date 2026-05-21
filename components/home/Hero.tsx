@@ -61,20 +61,22 @@ export default function Hero() {
 	return (
 		<section
 			ref={container}
-			className="relative h-screen flex flex-col items-center justify-center text-center px-6"
+			className='relative h-screen px-6'
 		>
-			<Image
-				src="/btbfilms.svg"
-				alt="Better Than Bad Films Logo"
-				width={800}
-				height={400}
-				className="logo md:max-w-[60vw] h-auto"
-				priority
-			/>
+			<div className='flex flex-col justify-center-safe lg:justify-start items-center text-center h-full'>
+				<Image
+					src='/btbfilms.svg'
+					alt='Better Than Bad Films Logo'
+					width={800}
+					height={400}
+					className='logo lg:max-w-[70vw] object-contain'
+					priority
+				/>
 
-			<p className="tagline text-3xl lg:text-4xl tracking-wide text-white">
-				Cinematic craft with strategic precision.
-			</p>
+				<p className='tagline text-2xl md:text-3xl lg:text-4xl tracking-wide text-white'>
+					Cinematic craft with strategic precision.
+				</p>
+			</div>
 		</section>
 	)
 }
