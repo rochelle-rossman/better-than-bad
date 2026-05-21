@@ -61,7 +61,7 @@ export default function Hero() {
 					priority
 				/>
 
-				<p className='tagline text-3xl lg:text-5xl tracking-wide text-white'>
+				<p className='tagline text-2xl md:text-3xl lg:text-4xl tracking-wide text-white'>
 					Cinematic craft with strategic precision.
 				</p>
 			</div>
