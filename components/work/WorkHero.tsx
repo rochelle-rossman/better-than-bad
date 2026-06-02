@@ -1,6 +1,6 @@
 export default function WorkHero() {
 	return (
-		<section className='min-h-[50vh] flex items-center justify-center text-center px-4'>
+		<section className='min-h-[50vh] flex items-center justify-center text-center px-4 text-white'>
 			<div className='space-y-6 max-w-3xl'>
 				<h1 className='text-5xl md:text-7xl font-light'>
 					Featured Works

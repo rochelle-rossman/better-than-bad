@@ -1,12 +1,13 @@
 'use client'
 
+import { useRef } from 'react'
 import Image from 'next/image'
 import { WorkProject } from '@/lib/workProjects'
 import { ArrowRight } from 'lucide-react'
 
 type Props = {
 	project: WorkProject
-	onOpen: (project: WorkProject) => void
+	onOpen: (project: WorkProject, rect: DOMRect) => void
 }
 
 const getCTA = (type: WorkProject['media']['type']) => {
@@ -15,18 +16,24 @@ const getCTA = (type: WorkProject['media']['type']) => {
 			return 'Watch'
 		case 'gallery':
 			return 'View'
-		case 'external':
-			return 'Explore'
 		default:
 			return 'View'
 	}
 }
 
 export default function MasonryCard({ project, onOpen }: Props) {
+	const cardRef = useRef<HTMLDivElement>(null)
+	
 	return (
 		<div
-			className='group relative w-full cursor-pointer overflow-hidden rounded-xl border border-white/20'
-			onClick={() => onOpen(project)}
+			ref={cardRef}
+			className='block group relative w-full cursor-pointer overflow-hidden rounded-xl border border-white/20'
+			onClick={() => {
+				const rect = cardRef.current?.getBoundingClientRect()
+				if (!rect) return
+
+				onOpen(project, rect)
+			}}
 		>
 			{/* Image */}
 			<Image
@@ -47,19 +54,8 @@ export default function MasonryCard({ project, onOpen }: Props) {
 						{project.title}
 					</h3>
 
-					{/* Client / Services */}
-					<div className='text-xs uppercase tracking-wider text-white/60'>
-						{project.client && <span>{project.client}</span>}
-						{project.services && project.services.length > 0 && (
-							<span>
-								{project.client && ' — '}
-								{project.services[0]}
-							</span>
-						)}
-					</div>
-
 					{/* CTA */}
-					<div className='pt-2'>
+					<div>
 						<span className='text-sm font-medium tracking-wide inline-flex items-center gap-2'>
 							{getCTA(project.media.type)}
 							<span className='inline-block transition-transform duration-300 group-hover:translate-x-1'>

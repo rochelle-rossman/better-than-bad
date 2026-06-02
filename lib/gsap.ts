@@ -1,6 +1,6 @@
 import gsap from 'gsap'
-import { ScrollSmoother, ScrollTrigger, SplitText } from 'gsap/all'
+import { ScrollSmoother, ScrollTrigger, SplitText, Flip } from 'gsap/all'
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText)
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, Flip)
 
-export { gsap, ScrollTrigger, ScrollSmoother, SplitText }
+export { gsap, ScrollTrigger, ScrollSmoother, SplitText, Flip }
