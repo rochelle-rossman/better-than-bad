@@ -4,7 +4,7 @@ import { forwardRef } from 'react'
 const CinematicBackground = forwardRef<HTMLDivElement>((_, ref) => (
 	<div
 		ref={ref}
-		className='cinematic-bg fixed inset-0 -z-10 bg-cinematic'
+		className='fixed inset-0 -z-10 bg-cinematic'
 	/>
 ))
 

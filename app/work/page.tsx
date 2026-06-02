@@ -1,34 +1,29 @@
 'use client'
 
 import { SplitWordCTA } from '@/components/SplitWordCTA'
-import FeaturedFilm from '@/components/work/FeaturedFilm'
-import VideoLightbox from '@/components/work/VideoLightbox'
+import ProjectViewer from '@/components/work/ProjectViewer'
 import WorkGrid from '@/components/work/WorkGrid'
 import WorkHero from '@/components/work/WorkHero'
-import { workProjects } from '@/lib/workProjects'
+import { workProjects, WorkProject } from '@/lib/workProjects'
 import { useState } from 'react'
 
 export default function WorkPage() {
-	const [activeVideo, setActiveVideo] = useState<string | null>(null)
+	const [activeProject, setActiveProject] = useState<WorkProject | null>(null)
 
 	return (
 		<main className='bg-black text-white'>
 			<WorkHero />
 
-			<FeaturedFilm
-				project={workProjects[0]}
-				onPlay={(url) => setActiveVideo(url)}
-			/>
-
 			<WorkGrid
-				projects={workProjects.slice(1)}
-				onPlay={(url) => setActiveVideo(url)}
+				projects={workProjects}
+				onOpen={setActiveProject}
 			/>
 
-			<VideoLightbox
-				url={activeVideo}
-				onClose={() => setActiveVideo(null)}
+			<ProjectViewer
+				project={activeProject}
+				onClose={() => setActiveProject(null)}
 			/>
+
 			<SplitWordCTA />
 		</main>
 	)

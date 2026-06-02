@@ -7,19 +7,16 @@ import { useRef } from 'react'
 const services = [
 	{
 		title: 'Creative Direction',
-		desc: 'Shaping bold ideas into cohesive visual stories — from first spark to final frame.',
+		desc: 'We didn’t win awards for nothing. Why blend in when you can be unforgettable?',
 	},
 	{
 		title: 'Creative Content Strategy',
-		desc: 'Building campaigns that don’t just reach audiences, but stay with them.',
+		desc: 'Detailed creative content strategies that focus on your goals, not on trends. Elevate your branding with flair and grow your reach with intention.',
 	},
 	{
-		title: 'Video Production',
-		desc: 'Crafting cinematic, story-driven video — from branded films to social-first content.',
-	},
-	{
-		title: 'Social Media Management',
-		desc: 'Turning content into momentum through thoughtful distribution and storytelling.',
+		title: 'Video and Photo Production',
+		desc: `“I feel like this was the best shoot of my career, and I’ve done a LOT. Thank you so much.” 
+		- Cassandra Sales, a real Better Than Bad client.`,
 	},
 ]
 
@@ -74,9 +71,9 @@ export default function Services() {
 	return (
 		<section
 			ref={container}
-			className='py-40 px-6 max-w-6xl mx-auto'
+			className='py-32 px-6 max-w-6xl mx-auto'
 		>
-			<div className='space-y-32'>
+			<div className='space-y-32 border-b border-white/20 py-16'>
 				{services.map((service, i) => {
 					const isLeft = i % 2 === 0
 
@@ -88,7 +85,7 @@ export default function Services() {
 							}`}
 						>
 							{/* Index */}
-							<div className='text-6xl md:text-8xl font-light text-white/10'>
+							<div className='text-6xl md:text-8xl font-light text-white/20'>
 								{String(i + 1).padStart(2, '0')}
 							</div>
 
@@ -107,6 +104,9 @@ export default function Services() {
 						</div>
 					)
 				})}
+				<h3 className='text-center text-5xl italic text-white mb-6'>
+					Need we say more?
+				</h3>
 			</div>
 		</section>
 	)

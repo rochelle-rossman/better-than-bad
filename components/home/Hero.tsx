@@ -69,12 +69,12 @@ export default function Hero() {
 					alt='Better Than Bad Films Logo'
 					width={800}
 					height={400}
-					className='logo lg:max-w-[70vw] object-contain'
+					className='logo md:max-w-[65vw] object-contain'
 					priority
 				/>
 
 				<p className='tagline text-2xl md:text-3xl lg:text-4xl tracking-wide text-white'>
-					Cinematic craft with strategic precision.
+					Bold, beautiful, and anything but boring.
 				</p>
 			</div>
 		</section>

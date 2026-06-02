@@ -17,7 +17,7 @@ export default function HeaderNav() {
 							width={50}
 							height={50}
 						/>
-						<span className='uppercase font-medium text-lg text-white'>
+						<span className='hidden lg:inline uppercase text-lg text-white'>
 							Better Than Bad Films
 						</span>
 					</Link>

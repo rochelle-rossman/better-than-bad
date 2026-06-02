@@ -29,8 +29,7 @@ export async function sendEmail(
 	try {
 		await resend.emails.send({
 			from: 'Website Contact <hello@contact.betterthanbadfilms.com>',
-			// to: 'julia@betterthanbadfilms.com',
-			to: 'rochelle.rossman@gmail.com',
+			to: 'julia@betterthanbadfilms.com',
 			replyTo: email,
 			subject: `New message from ${name}`,
 			html: `

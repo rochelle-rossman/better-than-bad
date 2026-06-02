@@ -56,24 +56,16 @@ export default function AboutPage() {
 							<strong>Better Than Bad Films</strong> is a boutique
 							studio founded by award-winning director and
 							creative strategist{' '}
-							<strong>Julia Barrett-Mitchell</strong>. With a
-							career spanning branded content campaigns, narrative
-							filmmaking, and documentary work, Julia has guided
-							creative direction for internationally recognized
-							brands, produced viral content, and earned accolades
-							at major film festivals for her original
-							storytelling.
+							<strong>Julia Barrett-Mitchell</strong>.
 						</p>
 
 						<p>
-							At the heart of the studio is a simple yet powerful
-							philosophy: <em>perfection is boring</em>. The name{' '}
-							<strong>Better Than Bad</strong> is both a wink and
-							a manifesto—a rebellion against ego, pretension, and
-							the relentless pursuit of “perfect.” It’s a reminder
-							that the best creative work is human, playful, and
-							collaborative. Humor, humility, and curiosity are as
-							important as cinematic craft.
+							The name <strong>Better Than Bad</strong> is both a
+							wink and a manifesto—a rebellion against ego,
+							pretension, and the futile pursuit of “perfect.”
+							It’s a reminder that the best creative work is
+							human, playful, and collaborative. Where your ideas
+							are nurtured and the process is fun.
 						</p>
 
 						<p>
@@ -82,20 +74,26 @@ export default function AboutPage() {
 							<strong>
 								strategic precision and cinematic flair
 							</strong>
-							. Whether it’s a brand campaign, a social media
-							series, or a short film, Julia and her team strive
-							to create work that is{' '}
+							. Whether it’s a branded campaign, a web or social
+							first series, a documentary or narrative short film,
+							Julia and her team strive to create work that is{' '}
 							<strong>
-								memorable, impactful, and unmistakably alive
+								entertaining, impactful, and unmistakably alive.
 							</strong>
 							.
 						</p>
 
 						<p>
-							This is a studio where ideas are nurtured, processes
-							are joyful, and the end result is always{' '}
-							<strong>better than bad</strong>—often f*cking
-							amazing.
+							And the results? They&apos;re{' '}
+							<strong>better than bad</strong>. Heck, they’re
+							f*cking amazing.
+						</p>
+						<p className='text-md italic text-white/70'>
+							Julia’s work has been published by NPR, BBC, Vevo,
+							Nylon, Chronogram, Inside+Out, Letterboxd, and
+							premiered at the Woodstock Film Festival. It has
+							also won “Best Of” awards at the Big Apple Film
+							Festival and the Hudson Valley Film Festival.
 						</p>
 					</div>
 
