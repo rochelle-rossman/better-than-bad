@@ -89,8 +89,7 @@ export default function StatementsAbout() {
 						studio led by award-winning director{' '}
 						<strong>Julia Barrett-Mitchell</strong>. We create
 						cinematic, human, and impactful work that’s
-						<em> better than bad</em>, blending humor, humility, and
-						strategic precision in every project.
+						<em> better than bad</em>.
 					</p>
 					<a href='/about'>
 						<Button className='inline-flex w-full items-center justify-center max-w-96 mt-4 px-6 py-3 bg-light-mustard text-black font-semibold rounded-full hover:opacity-90 transition'>
@@ -105,7 +104,7 @@ export default function StatementsAbout() {
 					className='mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-lg'
 				>
 					<Image
-						src='/Julia-Headshot.png'
+						src='/About-Julia-Photo.jpeg'
 						alt='Julia Barrett-Mitchell'
 						width={340}
 						height={340}

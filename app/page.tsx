@@ -8,10 +8,12 @@ import Services from '@/components/home/Services'
 import Testimonials from '@/components/home/Testimonials'
 import { SplitWordCTA } from '@/components/SplitWordCTA'
 import AboutTeaser from '@/components/home/About'
+import PopupCTA from '@/components/PopupCTA'
 
 export default function HomePage() {
 	return (
-		<main className='relative overflow-hidden min-h-screen'>
+		<main className='relative min-h-screen'>
+			<PopupCTA />
 			<section className='relative z-10'>
 				<Hero />
 			</section>

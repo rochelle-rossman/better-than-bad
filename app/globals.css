@@ -96,6 +96,10 @@
   h1 {
     @apply text-5xl md:text-6xl text-center mb-4;
   }
+  
+  h1, h2, h3 {
+    @apply font-heading;
+  }
 
   body {
     @apply bg-background text-foreground font-body;

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import HeaderNav from '@/components/HeaderNav'
 import Footer from '@/components/Footer'
 import { Montserrat, Karla } from 'next/font/google'
-import CinematicBackground from '@/components/home/CinematicBackground'
+import CinematicBackground from '@/components/CinematicBackground'
 import SmoothProvider from '@/components/SmoothProvider'
 import './globals.css'
 
