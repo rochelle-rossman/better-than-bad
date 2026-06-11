@@ -76,7 +76,7 @@ export function SplitWordCTA() {
 		>
 			<h2
 				ref={textRef}
-				className='text-5xl md:text-7xl font-semibold max-w-4xl'
+				className='text-5xl md:text-7xl max-w-4xl'
 			>
 				Ready to make something that actually stands out?
 			</h2>
@@ -84,9 +84,18 @@ export function SplitWordCTA() {
 			<Link
 				ref={buttonRef}
 				href='/contact'
-				className='w-full max-w-80'
+				className='w-full'
 			>
-				<Button className='w-full text-lg py-6 border rounded-full bg-transparent border-white hover:bg-white hover:text-black transition-all duration-300'>
+				<Button
+					className='w-full max-w-lg text-lg
+								inline-flex items-center justify-center gap-2
+								uppercase tracking-wide font-semibold
+								px-8 py-6 rounded-full
+								bg-white text-black
+								hover:scale-105 
+								transition-all duration-75
+								shadow-lg'
+				>
 					Let&apos;s chat
 				</Button>
 			</Link>
