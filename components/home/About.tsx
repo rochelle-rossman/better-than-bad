@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
+import { ArrowRight } from 'lucide-react'
 import { gsap } from '@/lib/gsap'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
@@ -74,16 +75,16 @@ export default function StatementsAbout() {
 				<div className='text-center md:text-left space-y-6 md:space-y-8'>
 					<h3
 						ref={subheadingRef}
-						className='text-2xl font-light'
+						className='text-2xl font-light leading-relaxed'
 					>
 						{' '}
 						So, why call it &quot;Better Than Bad&quot;?
 						<br />
-						<span className='text-3xl mt-2'>Because perfection is boring.</span>
+						<span className='text-3xl font-semibold'>Because perfection is boring.</span>
 					</h3>
 					<p
 						ref={paragraphRef}
-						className='text-lg md:text-xl leading-relaxed max-w-2xl mx-auto md:mx-0'
+						className='text-lg md:text-xl max-w-2xl mx-auto md:mx-0'
 					>
 						<strong>Better Than Bad Films</strong> is a boutique
 						studio led by award-winning director{' '}
@@ -92,8 +93,9 @@ export default function StatementsAbout() {
 						<em> better than bad</em>.
 					</p>
 					<a href='/about'>
-						<Button className='inline-flex w-full items-center justify-center max-w-96 mt-4 px-6 py-3 bg-light-mustard text-black font-semibold rounded-full hover:opacity-90 transition'>
-							Read More
+						<Button className='inline-flex w-full text-lg py-6 border rounded-full bg-transparent border-white hover:bg-white hover:text-black transition-all duration-300'>
+							Learn More
+							<ArrowRight />
 						</Button>
 					</a>
 				</div>

@@ -16,7 +16,7 @@ export default function ProjectViewer({
 
 	return (
 		<div
-			className='fixed inset-0 z-50 bg-black/95 py-32 flex items-start justify-center'
+			className='fixed inset-0 z-50 overflow-y-auto bg-black/95 py-32 flex items-start justify-center'
 			onClick={onClose}
 		>
 			<div
@@ -26,19 +26,33 @@ export default function ProjectViewer({
 				{/* Close */}
 				<button
 					onClick={onClose}
-					className='absolute -top-4 -right-4 text-white cursor-pointer opacity-70 hover:opacity-100'
+					className='absolute top-4 right-4 text-white cursor-pointer opacity-70 hover:opacity-100'
 				>
 					<X size={30} />
 					<span className='sr-only'>Close</span>
 				</button>
 
-				<h2 className='text-3xl md:text-5xl  mb-6'>{project.title}</h2>
+				<h2 className='text-3xl md:text-5xl my-6'>{project.title}</h2>
 				{project.client && (
 					<p className='text-sm uppercase tracking-wider text-white/60 mb-4'>
 						{project.client}
 					</p>
 				)}
-				<p className='text-lg leading-relaxed'>{project.description}</p>
+				{project.description && (
+					<p className='text-lg leading-relaxed'>
+						{project.description}
+					</p>
+				)}
+				{project.externalLink && (
+					<a
+						href={project.externalLink}
+						target='_blank'
+						rel='noopener noreferrer'
+						className='text-accent hover:underline'
+					>
+						See More
+					</a>
+				)}
 
 				<ProjectMedia media={project.media} />
 			</div>

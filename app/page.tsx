@@ -8,7 +8,7 @@ import Services from '@/components/home/Services'
 import Testimonials from '@/components/home/Testimonials'
 import { SplitWordCTA } from '@/components/SplitWordCTA'
 import AboutTeaser from '@/components/home/About'
-import PopupCTA from '@/components/PopupCTA'
+import PopupCTA from '@/components/PopUpCTA'
 
 export default function HomePage() {
 	return (

@@ -23,19 +23,21 @@ export default function WorkGrid({ projects, onOpen }: WorkGridProps) {
 		const columnCount = getColumnCount()
 		const columnHeights = new Array(columnCount).fill(0)
 		const columnWidth = container.clientWidth / columnCount
+		const offset = (index: number) => (index % 3 === 0 ? 12 : 0)
+		
 
-		items.forEach((item) => {
-			item.style.position = 'absolute'
-			item.style.width = `${columnWidth}px`
-
+		items.forEach((item, i) => {
 			const minColumn = columnHeights.indexOf(Math.min(...columnHeights))
-
+			const gap = i % 3 === 0 ? 28 : 16
 			const x = minColumn * columnWidth
-			const y = columnHeights[minColumn]
-
+			const y = columnHeights[minColumn] + offset(i)
+			const variance = i % 4 === 0 ? -12 : 0
+			
+			item.style.position = 'absolute'
+			item.style.width = `${columnWidth - 16 + variance}px`
 			item.style.transform = `translate(${x}px, ${y}px)`
 
-			columnHeights[minColumn] += item.offsetHeight + 16
+			columnHeights[minColumn] += item.offsetHeight + gap
 		})
 
 		container.style.height = `${Math.max(...columnHeights)}px`
@@ -67,7 +69,6 @@ export default function WorkGrid({ projects, onOpen }: WorkGridProps) {
 		let timeout: NodeJS.Timeout | null = null
 
 		const handleResize = () => {
-			// debounce to avoid thrashing
 			if (timeout) clearTimeout(timeout)
 
 			timeout = setTimeout(() => {
@@ -90,7 +91,10 @@ export default function WorkGrid({ projects, onOpen }: WorkGridProps) {
 				className='relative w-full'
 			>
 				{projects.map((project) => (
-					<div key={project.title} data-masonry-item>
+					<div
+						key={project.title}
+						data-masonry-item
+					>
 						<WorkCard
 							project={project}
 							onOpen={onOpen}

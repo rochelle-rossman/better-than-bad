@@ -16,6 +16,7 @@ export type WorkProject = {
 	thumbnail: string
 	media: WorkMedia
 	description?: string
+	externalLink?: string
 }
 
 export const workProjects: WorkProject[] = [
@@ -50,7 +51,7 @@ export const workProjects: WorkProject[] = [
 		}
 	},
 	{
-		title: "Good Comin' (OFFICIAL MUSIC VIDEO)",
+		title: "Good Comin' (Official Music Video)",
 		client: 'Beccs',
 		services: ['Creative Direction', 'Video Production'],
 		thumbnail: '/work/good-comin-still.png',
@@ -60,7 +61,7 @@ export const workProjects: WorkProject[] = [
 		}
 	},
 	{
-		title: "Swimmers (OFFICIAL VIDEO)",
+		title: "Swimmers (Official Music Video)",
 		client: 'Alexander F',
 		services: ['Creative Direction', 'Video Production'],
 		thumbnail: '/work/swimmers-still.png',
@@ -78,7 +79,8 @@ export const workProjects: WorkProject[] = [
 			type: 'gallery',
 			images: ['/work/Cass-Crop-Top-Cherry-Blossom.png', '/work/Cass-Outfit-Detail-On-Liberty.png', '/work/Cass-Shorts-Liberty-Street.png']
 		},
-		description: 'A series of videos and photos created for Casa Pole Dance, a pole dance studio in Newburgh, NY. The project included a brand video, social media content, and promotional materials for the studio.'
+		description: 'A series of videos and photos created for Casa Pole Dance, a pole dance studio in Newburgh, NY. The project included a brand video, social media content, and promotional materials for the studio.',
+		externalLink: 'https://www.instagram.com/p/DYXL6EkRLJU/'
 
 
 	},

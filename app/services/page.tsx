@@ -199,7 +199,7 @@ export default function ServicesPage() {
 			))}
 
 			<section className='min-h-[80vh] flex items-center justify-center px-6 md:px-12'>
-				<div className='text-center max-w-3xl'>
+				<div className='text-center max-w-3xl space-y-8'>
 					<p className='text-xs uppercase tracking-[0.35em] opacity-60 mb-6'>
 						Next step
 					</p>
@@ -208,7 +208,14 @@ export default function ServicesPage() {
 					</h2>
 					<Link
 						href='/contact'
-						className='inline-flex mt-10 border border-white px-10 py-4 text-lg rounded-full hover:bg-white hover:text-black transition-all duration-300'
+						className='w-full max-w-lg text-lg
+								inline-flex items-center justify-center gap-2
+								uppercase tracking-wide font-semibold
+								px-8 py-3 rounded-full
+								bg-white text-black
+								hover:scale-105 
+								transition-all duration-75
+								shadow-lg'
 					>
 						Start a Project
 					</Link>
