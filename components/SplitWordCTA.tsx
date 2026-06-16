@@ -32,13 +32,13 @@ export function SplitWordCTA() {
 				})
 
 				tl.from(words, {
-					y: 120,
+					y: 200,
 					opacity: 0,
 					stagger: 0.04,
 					duration: 1,
 				})
 
-					.to({}, { duration: 0.6 })
+					.to({}, { duration: 0.3 })
 
 					.fromTo(
 						buttonRef.current,
@@ -51,7 +51,7 @@ export function SplitWordCTA() {
 							opacity: 1,
 							scale: 1,
 							y: 0,
-							duration: 0.8,
+							duration: 0.5,
 							ease: 'power3.out',
 						},
 						'-=0.2',
@@ -89,14 +89,14 @@ export function SplitWordCTA() {
 				<Button
 					className='w-full max-w-lg text-lg
 								inline-flex items-center justify-center gap-2
-								uppercase tracking-wide font-semibold
+								tracking-wide font-semibold
 								px-8 py-6 rounded-full
 								bg-white text-black
 								hover:scale-105 
 								transition-all duration-75
 								shadow-lg'
 				>
-					Let&apos;s chat
+					Let&apos;s talk
 				</Button>
 			</Link>
 		</section>

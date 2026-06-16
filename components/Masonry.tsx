@@ -54,7 +54,7 @@ function MasonryItem({ img, index }: { img: MasonryImage; index: number }) {
 }
 
 function getColumnCount() {
-	if (window.innerWidth < 640) return 1
+	// if (window.innerWidth < 640) return 1
 	if (window.innerWidth < 1024) return 2
 	return 3
 }
