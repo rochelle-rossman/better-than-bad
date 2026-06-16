@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/next'
 import HeaderNav from '@/components/HeaderNav'
 import Footer from '@/components/Footer'
 import { Montserrat, Karla } from 'next/font/google'
@@ -56,6 +57,7 @@ export default function RootLayout({
 					{children}
 					<Footer />
 				</SmoothProvider>
+				<Analytics />
 			</body>
 		</html>
 	)
