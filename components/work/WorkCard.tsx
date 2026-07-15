@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { WorkProject } from '@/lib/workProjects'
 import BorderGlow from '../BorderGlow'
@@ -21,9 +21,20 @@ function getAspect(project: WorkProject) {
 
 export default function MasonryCard({ project, onOpen }: Props) {
 	const cardRef = useRef<HTMLDivElement>(null)
+	const [isTouch, setIsTouch] = useState(false)
+	
+	useEffect(() => {
+		const mq = window.matchMedia('(hover: none) and (pointer: coarse)')
+		const updateTouch = () => requestAnimationFrame(() => setIsTouch(mq.matches))
+
+		updateTouch()
+		mq.addEventListener('change', updateTouch)
+
+		return () => mq.removeEventListener('change', updateTouch)
+	}, [])
 
 	const { bind, state } = useInteractive({
-		enableTapToReveal: true,
+		enableTapToReveal: !isTouch,
 		onOpen: () => {
 			const rect = cardRef.current?.getBoundingClientRect()
 			if (!rect) return
@@ -33,6 +44,7 @@ export default function MasonryCard({ project, onOpen }: Props) {
 
 	const isActive = state.active
 	const isHovered = state.hovered
+	const showContent = isTouch || isHovered || isActive
 
 	return (
 		<BorderGlow>
@@ -43,7 +55,7 @@ export default function MasonryCard({ project, onOpen }: Props) {
 					group relative w-full cursor-pointer overflow-hidden rounded-xl
 					${getAspect(project)}
 					transition-transform duration-300
-					${state.pressed ? 'scale-[0.98]' : ''}
+					${showContent ? 'scale-[0.98]' : ''}
 				`}
 			>
 				<Image
@@ -53,34 +65,34 @@ export default function MasonryCard({ project, onOpen }: Props) {
 					className={`
 						object-cover
 						transition-transform duration-700
-						${isHovered || isActive ? 'scale-110' : ''}
+						${showContent ? 'scale-110' : ''}
 					`}
 				/>
 
 				{/* Overlay */}
 				<div
 					className={`
-						absolute inset-0 bg-black/60
+						absolute inset-x-0 bottom-0 h-3/4 bg-linear-to-t from-black/80 to-transparent
 						transition duration-300
-						${isHovered || isActive ? 'opacity-100' : 'opacity-0'}
+						${showContent ? 'opacity-100' : 'opacity-0'}
 					`}
 				/>
 
 				{/* Content */}
 				<div
 					className={`
-						absolute bottom-0 p-5
+						absolute bottom-0 px-5 py-7
 						transition-all duration-500
 						${
-							isHovered || isActive ?
+							showContent ?
 								'translate-y-0 opacity-100'
 							:	'translate-y-4 opacity-0'
 						}
 					`}
 				>
-					<h3 className='text-lg'>{project.title}</h3>
+					<h3 className='text-2xl'>{project.title}</h3>
 
-					<div className='text-sm inline-flex items-center gap-2'>
+					<div className='inline-flex items-center gap-2'>
 						View More
 						<ArrowRight size={16} />
 					</div>

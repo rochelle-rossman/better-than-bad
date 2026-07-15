@@ -80,15 +80,13 @@ export default function Logos() {
 		bp === 'mobile' ? 'h-[420px]'
 		: bp === 'tablet' ? 'h-[520px]'
 		: 'h-[560px]'
-	const motionScale =
-		bp === 'mobile' ? 0.3
-		: bp === 'tablet' ? 0.6
-		: 1
+	const motionScale = bp === 'tablet' ? 0.6 : 1
 
 	useGSAP(
 		() => {
 			const mm = gsap.matchMedia()
-			mm.add('(prefers-reduced-motion: no-preference)', () => {
+
+			mm.add('(min-width: 768px)', () => {
 				gsap.from('.client-logo', {
 					opacity: 0,
 					scale: 0.8,
@@ -113,6 +111,21 @@ export default function Logos() {
 					yoyo: true,
 					ease: 'sine.inOut',
 					stagger: 0.2,
+				})
+			})
+
+			mm.add('(max-width: 767px)', () => {
+				gsap.from('.client-logo', {
+					opacity: 0,
+					y: 20,
+					duration: 0.8,
+					stagger: 0.08,
+					ease: 'power2.out',
+					scrollTrigger: {
+						trigger: container.current,
+						start: 'top 90%',
+						once: true,
+					},
 				})
 			})
 
@@ -152,7 +165,7 @@ export default function Logos() {
 									left: pos.left,
 								}}
 							>
-								<div className='absolute inset-0 w-full h-full rounded-full bg-white blur-xs scale-150' />
+								<div className='absolute inset-0 w-full h-full rounded-full bg-white blur-xs scale-160' />
 								<Image
 									src={client.logo}
 									alt={client.name + ' logo'}
