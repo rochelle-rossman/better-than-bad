@@ -88,7 +88,7 @@ export default function WorkGrid({ projects, onOpen }: WorkGridProps) {
 		<section className='px-6'>
 			<div
 				ref={containerRef}
-				className='relative w-full'
+				className='relative w-full max-sm:flex justify-center'
 			>
 				{projects.map((project) => (
 					<div
