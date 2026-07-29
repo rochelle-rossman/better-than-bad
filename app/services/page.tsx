@@ -34,15 +34,6 @@ const services = [
 			'Editing for web, social, and launch campaigns',
 		],
 	},
-	{
-		title: 'Social Media Management',
-		desc: 'Amplifying your creative work across platforms with strategy, storytelling, and consistency.',
-		points: [
-			'Publishing cadence and content support',
-			'Visual cohesion across platforms',
-			'Performance-informed iteration',
-		],
-	},
 ]
 
 export default function ServicesPage() {
