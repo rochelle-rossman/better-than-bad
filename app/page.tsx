@@ -12,7 +12,7 @@ import PopupCTA from '@/components/PopUpCTA'
 
 export default function HomePage() {
 	return (
-		<main className='relative min-h-screen'>
+		<main className='relative min-h-100svh'>
 			<PopupCTA />
 			<section className='relative z-10'>
 				<Hero />

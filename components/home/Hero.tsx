@@ -17,7 +17,7 @@ export default function Hero() {
 				const tl = gsap.timeline({
 					scrollTrigger: {
 						trigger: container.current,
-						start: 'top top+=10%',
+						start: 'top top',
 						end: 'bottom top',
 						scrub: 1.2,
 						pin: true,
@@ -61,9 +61,9 @@ export default function Hero() {
 	return (
 		<section
 			ref={container}
-			className='relative h-screen px-6'
+			className='relative min-h-100svh px-6'
 		>
-			<div className='flex flex-col justify-center-safe lg:justify-start items-center text-center h-full'>
+			<div className='flex flex-col justify-center-safe lg:justify-start items-center text-center h-full py-10 lg:py-20'>
 				<Image
 					src='/btbfilms.svg'
 					alt='Better Than Bad Films Logo'
