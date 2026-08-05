@@ -5,6 +5,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, Flip)
 
 ScrollTrigger.config({
 	ignoreMobileResize: true,
+	limitCallbacks: true,
 })
 
 export { gsap, ScrollTrigger, ScrollSmoother, SplitText, Flip }

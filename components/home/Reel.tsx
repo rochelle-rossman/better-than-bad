@@ -18,6 +18,7 @@ export default function Reel() {
 					scrollTrigger: {
 						trigger: container.current,
 						start: 'top top',
+						end: 'bottom top',
 						scrub: 1.2,
 						pin: true,
 						anticipatePin: 1,

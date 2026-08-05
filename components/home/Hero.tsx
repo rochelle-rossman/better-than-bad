@@ -63,7 +63,7 @@ export default function Hero() {
 			ref={container}
 			className='relative min-h-100svh px-6'
 		>
-			<div className='flex flex-col justify-center-safe lg:justify-start items-center text-center h-full py-10 lg:py-20'>
+			<div className='flex flex-col lg:justify-start items-center text-center h-full py-30 md:py-20'>
 				<Image
 					src='/btbfilms.svg'
 					alt='Better Than Bad Films Logo'
@@ -73,7 +73,7 @@ export default function Hero() {
 					priority
 				/>
 
-				<p className='tagline text-2xl md:text-3xl lg:text-4xl tracking-wide text-white'>
+				<p className='tagline text-3xl lg:text-4xl tracking-wide text-white'>
 					Bold, beautiful, and anything but boring.
 				</p>
 			</div>
