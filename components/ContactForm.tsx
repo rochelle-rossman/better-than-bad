@@ -70,7 +70,7 @@ export default function ContactForm() {
 	return (
 		<section
 			ref={containerRef}
-			className='w-full h-100svh px-4 md:px-10  text-white  flex items-center justify-center'
+			className='w-full px-4 md:px-10  text-white  flex items-center justify-center'
 			id='contact'
 		>
 			{result === 'Form Submitted Successfully' ?
