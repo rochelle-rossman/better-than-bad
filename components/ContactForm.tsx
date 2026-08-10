@@ -1,32 +1,41 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
-import { useFormStatus } from 'react-dom'
-import { useActionState } from 'react'
-import { sendEmail } from '@/app/api/send'
+import { useRef, useEffect, useState, SubmitEvent } from 'react'
 import { gsap } from '@/lib/gsap'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 
-const initialState = { success: false, error: '' }
-
-function SubmitButton() {
-	const { pending } = useFormStatus()
-	return (
-		<Button className='mt-10 w-full text-lg py-6 border rounded-full bg-transparent border-white hover:bg-white hover:text-black transition-all duration-300'>
-			{pending ? 'Sending...' : 'Send Message'}
-		</Button>
-	)
-}
-
 export default function ContactForm() {
-	const [state, formAction] = useActionState(sendEmail, initialState)
-
+	const formRef = useRef<HTMLFormElement | null>(null)
+	const [result, setResult] = useState<string>('')
+	const [error, setError] = useState<string | null>(null)
 	const containerRef = useRef<HTMLDivElement>(null)
 	const leftRef = useRef<HTMLDivElement>(null)
 	const formWrapperRef = useRef<HTMLDivElement>(null)
 	const successRef = useRef<HTMLDivElement>(null)
+	
+	async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
+		event.preventDefault()
+		setError(null)
+		setResult('Sending....')
+		const target = event.target as HTMLFormElement
+		const formData = new FormData(target)
+		formData.append('access_key', '9daa89c6-7b52-429e-b4fa-3f05bd341ae7')
+
+		const response = await fetch('https://api.web3forms.com/submit', {
+			method: 'POST',
+			body: formData,
+		})
+
+		const data = (await response.json())
+		if (data && data.success) {
+			setResult('Form Submitted Successfully')
+			target.reset()
+		} else {
+			setResult('Error')
+		}
+	}
 
 	useEffect(() => {
 		const ctx = gsap.context(() => {
@@ -49,25 +58,25 @@ export default function ContactForm() {
 	}, [])
 
 	useEffect(() => {
-		if (state.success && successRef.current) {
+		if (successRef.current) {
 			gsap.fromTo(
 				successRef.current,
 				{ opacity: 0, y: 40 },
 				{ opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
 			)
 		}
-	}, [state.success])
+	}, [successRef, result])
 
 	return (
 		<section
 			ref={containerRef}
-			className='w-full px-4 md:px-10  text-white  flex items-center justify-center'
+			className='w-full h-100svh px-4 md:px-10  text-white  flex items-center justify-center'
 			id='contact'
 		>
-			{state.success ?
+			{result === 'Form Submitted Successfully' ?
 				<div
 					ref={successRef}
-					className='flex flex-col items-center text-center max-w-xl'
+					className='max-w-5xl mx-auto flex flex-col gap-12 items-center w-full'
 				>
 					<h3 className='text-5xl md:text-7xl font-semibold mb-6'>
 						Got it.
@@ -86,8 +95,8 @@ export default function ContactForm() {
 							Let’s make something better than bad.
 						</h2>
 						<p className='text-lg lg:text-xl opacity-80'>
-							If you’re tired of safe, predictable work — we’ll get
-							along just fine.
+							If you’re tired of safe, predictable work — we’ll
+							get along just fine.
 						</p>
 					</div>
 
@@ -96,7 +105,8 @@ export default function ContactForm() {
 						className='w-full'
 					>
 						<form
-							action={formAction}
+							ref={formRef}
+							onSubmit={handleSubmit}
 							className='flex flex-col gap-10'
 						>
 							<div className='field border-b pb-2'>
@@ -134,11 +144,13 @@ export default function ContactForm() {
 								/>
 							</div>
 
-							<SubmitButton />
+							<Button className='mt-10 w-full text-lg py-6 border rounded-full bg-transparent border-white hover:bg-white hover:text-black transition-all duration-300'>
+								Send Message
+							</Button>
 
-							{state?.error && (
+							{error && (
 								<p className='text-red-400 text-sm mt-2'>
-									{state.error}
+									{error}
 								</p>
 							)}
 						</form>
